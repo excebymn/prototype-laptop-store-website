@@ -18,7 +18,7 @@ import type { StoreInfo } from "@/lib/data";
 import storeInfo from "@/lib/data/mock/store-info.json";
 import { formatPrice } from "@/lib/format";
 import { CONDITION_LABEL, CONDITION_STYLE } from "@/lib/laptop-display";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL, INSTAGRAM_PROFILE_URL } from "@/lib/site";
 import { LaptopGallery } from "@/components/laptop-gallery";
 import { AddToCompareButton } from "@/components/laptop-card/add-to-compare-button";
 import { ContactAdminButton } from "@/components/contact-admin-button";
@@ -170,9 +170,8 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
 
           <div className="flex flex-wrap gap-3">
             <ContactAdminButton
-              whatsappNumber={info.whatsapp}
-              productName={laptop.name}
-              price={laptop.price}
+              instagramUrl={info.socialMedia.instagram ?? INSTAGRAM_PROFILE_URL}
+              laptop={laptop}
             />
             <AddToCompareButton laptop={laptop} />
           </div>

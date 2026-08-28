@@ -13,3 +13,16 @@ export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://excebymn.id
 // `NEXT_PUBLIC_SHOW_PROTOTYPE_NOTICE=false` di dashboard hosting (Vercel)
 // supaya popup hilang tanpa perlu hapus komponennya dari kode.
 export const SHOW_PROTOTYPE_NOTICE = process.env.NEXT_PUBLIC_SHOW_PROTOTYPE_NOTICE !== "false";
+
+// Kontak utama situs ini untuk sementara cuma Instagram (belum WhatsApp) —
+// supaya nomor WA tidak tersebar dulu. `INSTAGRAM_PROFILE_URL` dipakai
+// sebagai fallback kalau `storeInfo.socialMedia.instagram` (field opsional)
+// kosong. `instagramMessageLink` mengubah URL profil Instagram jadi link
+// yang langsung buka jendela chat/DM di Instagram (`ig.me/m/<username>`),
+// bukan cuma halaman profil.
+export const INSTAGRAM_PROFILE_URL = "https://instagram.com/excebymn";
+
+export function instagramMessageLink(profileUrl: string): string {
+  const handle = profileUrl.replace(/\/+$/, "").split("/").pop() ?? "";
+  return `https://ig.me/m/${handle}`;
+}

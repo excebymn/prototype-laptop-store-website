@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Instagram, Mail, MapPin } from "lucide-react";
 import storeInfo from "@/lib/data/mock/store-info.json";
 import type { StoreInfo } from "@/lib/data";
+import { INSTAGRAM_PROFILE_URL, instagramMessageLink } from "@/lib/site";
 
 const info = storeInfo as StoreInfo;
 
@@ -13,7 +14,7 @@ const NAV_LINKS = [
 ];
 
 export function Footer() {
-  const waLink = `https://wa.me/${info.whatsapp}`;
+  const igDmLink = instagramMessageLink(info.socialMedia.instagram ?? INSTAGRAM_PROFILE_URL);
 
   return (
     <footer className="bg-ink text-paper/80">
@@ -42,13 +43,13 @@ export function Footer() {
             <ul className="mt-3 space-y-2 text-sm">
               <li>
                 <a
-                  href={waLink}
+                  href={igDmLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-paper flex items-start gap-2 transition-colors"
                 >
-                  <MessageCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
-                  <span>WhatsApp: {info.phone}</span>
+                  <Instagram className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
+                  <span>Instagram: @excebymn</span>
                 </a>
               </li>
               <li>
@@ -58,15 +59,6 @@ export function Footer() {
                 >
                   <Mail className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
                   <span>{info.email}</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`tel:${info.phone}`}
-                  className="hover:text-paper flex items-start gap-2 transition-colors"
-                >
-                  <Phone className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
-                  <span>{info.phone}</span>
                 </a>
               </li>
               <li className="flex items-start gap-2">

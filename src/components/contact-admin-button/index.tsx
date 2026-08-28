@@ -1,30 +1,37 @@
 "use client";
 
-import { MessageCircle } from "lucide-react";
-import { formatPrice } from "@/lib/format";
+import { useState } from "react";
+import { Instagram } from "lucide-react";
+import { buildLaptopShareText } from "@/lib/share-text";
+import { instagramMessageLink } from "@/lib/site";
+import type { Laptop } from "@/lib/data";
 
-// Link wa.me butuh URL halaman saat ini (window.location), jadi komponen ini
-// harus client-side — nomor WA & nama/harga produk sudah pasti dari server,
-// tapi origin domain baru diketahui di browser saat tombol diklik.
+// Kontak admin untuk sementara diarahkan ke DM Instagram (bukan WhatsApp) —
+// lihat catatan di `lib/site.ts`. Instagram tidak punya cara resmi untuk
+// mengisi teks pesan otomatis lewat URL seperti `wa.me`, jadi sebagai
+// gantinya kita salin info produk ke clipboard dulu (format sama seperti
+// tombol "Salin Info" di `ProductShare`) baru buka jendela DM-nya — supaya
+// pengunjung tinggal paste begitu chat-nya kebuka.
 
 interface ContactAdminButtonProps {
-  whatsappNumber: string;
-  productName: string;
-  price: number;
+  instagramUrl: string;
+  laptop: Laptop;
   className?: string;
 }
 
-export function ContactAdminButton({
-  whatsappNumber,
-  productName,
-  price,
-  className,
-}: ContactAdminButtonProps) {
-  const handleClick = () => {
-    const pageUrl = window.location.href;
-    const message = `Halo, saya mau tanya soal ${productName} (${formatPrice(price)}).\n${pageUrl}`;
-    const link = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-    window.open(link, "_blank", "noopener,noreferrer");
+export function ContactAdminButton({ instagramUrl, laptop, className }: ContactAdminButtonProps) {
+  const [copied, setCopied] = useState(false);
+
+  const handleClick = async () => {
+    try {
+      const text = buildLaptopShareText(laptop, window.location.href);
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2500);
+    } catch {
+      // Clipboard bisa gagal (mis. browser lama) — DM tetap dibuka manual.
+    }
+    window.open(instagramMessageLink(instagramUrl), "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -36,8 +43,8 @@ export function ContactAdminButton({
         "bg-ink inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
       }
     >
-      <MessageCircle className="h-4 w-4" aria-hidden="true" />
-      Hubungi Admin
+      <Instagram className="h-4 w-4" aria-hidden="true" />
+      {copied ? "Info disalin, buka DM..." : "Hubungi via Instagram"}
     </button>
   );
 }

@@ -16,6 +16,7 @@ import type { Category } from "@/lib/data";
 import { LaptopCard } from "@/components/laptop-card";
 import storeInfo from "@/lib/data/mock/store-info.json";
 import type { StoreInfo } from "@/lib/data";
+import { INSTAGRAM_PROFILE_URL, instagramMessageLink } from "@/lib/site";
 
 const info = storeInfo as StoreInfo;
 
@@ -42,7 +43,7 @@ const NEED_CATEGORIES: { value: Category; label: string; icon: typeof Briefcase 
 
 export default async function HomePage() {
   const featuredLaptops = await laptopRepository.getFeatured();
-  const waLink = `https://wa.me/${info.whatsapp}`;
+  const igDmLink = instagramMessageLink(info.socialMedia.instagram ?? INSTAGRAM_PROFILE_URL);
 
   return (
     <main className="flex flex-1 flex-col">
@@ -193,7 +194,7 @@ export default async function HomePage() {
               Explore Laptops
             </Link>
             <a
-              href={waLink}
+              href={igDmLink}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-full border border-white/30 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"

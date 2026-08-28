@@ -1,23 +1,26 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { MessageCircle, X } from "lucide-react";
+import { Instagram, X } from "lucide-react";
 import storeInfo from "@/lib/data/mock/store-info.json";
 import type { StoreInfo } from "@/lib/data";
-import { SHOW_PROTOTYPE_NOTICE } from "@/lib/site";
+import { SHOW_PROTOTYPE_NOTICE, INSTAGRAM_PROFILE_URL, instagramMessageLink } from "@/lib/site";
 
-// Popup global, muncul sekali per sesi browser, yang memberi tahu pengunjung
-// bahwa situs ini adalah prototype/showcase karya Excebymn — bukan toko yang
-// betulan beroperasi. Tujuannya konversi: pengunjung (calon klien) diarahkan
-// menghubungi Excebymn kalau tertarik desain & fitur ini dijadikan situs
-// mereka sendiri.
+// Popup global, muncul setiap kali situs di-refresh (bukan cuma sekali per
+// sesi), yang memberi tahu pengunjung bahwa situs ini adalah prototype/
+// showcase karya Excebymn — bukan toko yang betulan beroperasi. Tujuannya
+// konversi: pengunjung (calon klien) diarahkan menghubungi Excebymn lewat
+// Instagram kalau tertarik desain & fitur ini dijadikan situs mereka
+// sendiri.
 //
 // Dipasang sekali di `app/layout.tsx` supaya tampil di semua halaman, bukan
-// per-halaman. Kalau situs ini nanti benar-benar diserahkan/dijual ke klien,
-// tinggal set `NEXT_PUBLIC_SHOW_PROTOTYPE_NOTICE=false` di environment —
-// tidak perlu hapus komponen ini (lihat `lib/site.ts`).
+// per-halaman. Sengaja tidak disimpan ke sessionStorage/localStorage —
+// komponen ini remount setiap full page load, jadi popup akan muncul lagi
+// tiap kali pengunjung refresh, meskipun sebelumnya sudah ditutup. Kalau
+// situs ini nanti benar-benar diserahkan/dijual ke klien, tinggal set
+// `NEXT_PUBLIC_SHOW_PROTOTYPE_NOTICE=false` di environment — tidak perlu
+// hapus komponen ini (lihat `lib/site.ts`).
 
-const STORAGE_KEY = "excebymn-prototype-notice-dismissed";
 const SHOW_DELAY_MS = 1200;
 
 const info = storeInfo as StoreInfo;
@@ -26,14 +29,10 @@ export function PrototypeNotice() {
   const [isOpen, setIsOpen] = useState(false);
 
   // Tampilkan setelah delay kecil (biar tidak "menyerbu" begitu halaman
-  // dibuka) dan cuma sekali per sesi tab (sessionStorage, bukan
-  // localStorage — supaya calon klien yang balik lagi besok tetap diingatkan
-  // ini prototype).
+  // dibuka) — setiap kali komponen ini mount, yaitu setiap full page
+  // load/refresh.
   useEffect(() => {
     if (!SHOW_PROTOTYPE_NOTICE) return;
-
-    const alreadyDismissed = window.sessionStorage.getItem(STORAGE_KEY);
-    if (alreadyDismissed) return;
 
     const timer = window.setTimeout(() => setIsOpen(true), SHOW_DELAY_MS);
     return () => window.clearTimeout(timer);
@@ -51,13 +50,11 @@ export function PrototypeNotice() {
   }, [isOpen]);
 
   function dismiss() {
-    window.sessionStorage.setItem(STORAGE_KEY, "1");
     setIsOpen(false);
   }
 
   function handleContact() {
-    const message = `Halo Excebymn, saya lihat prototype website "${info.storeName}" dan tertarik kalau desain ini bisa dijadikan situs saya sendiri.`;
-    const link = `https://wa.me/${info.whatsapp}?text=${encodeURIComponent(message)}`;
+    const link = instagramMessageLink(info.socialMedia.instagram ?? INSTAGRAM_PROFILE_URL);
     window.open(link, "_blank", "noopener,noreferrer");
     dismiss();
   }
@@ -105,8 +102,8 @@ export function PrototypeNotice() {
             onClick={handleContact}
             className="bg-ink inline-flex flex-1 items-center justify-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
           >
-            <MessageCircle className="h-4 w-4" aria-hidden="true" />
-            Hubungi Excebymn
+            <Instagram className="h-4 w-4" aria-hidden="true" />
+            Hubungi via Instagram
           </button>
           <button
             type="button"

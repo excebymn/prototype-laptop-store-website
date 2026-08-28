@@ -1,24 +1,25 @@
 import type { Metadata } from "next";
-import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Instagram, Mail, MapPin } from "lucide-react";
 import storeInfo from "@/lib/data/mock/store-info.json";
 import type { StoreInfo } from "@/lib/data";
+import { INSTAGRAM_PROFILE_URL, instagramMessageLink } from "@/lib/site";
 
 const info = storeInfo as StoreInfo;
 
 export const metadata: Metadata = {
   title: "Hubungi Kami",
-  description: `Chat via WhatsApp, telepon, atau email — ${info.storeName} siap bantu jawab pertanyaanmu.`,
+  description: `Chat via Instagram atau email — ${info.storeName} siap bantu jawab pertanyaanmu.`,
   alternates: { canonical: "/contact" },
   openGraph: {
     title: `Hubungi ${info.storeName}`,
-    description: `Chat via WhatsApp, telepon, atau email — ${info.storeName} siap bantu jawab pertanyaanmu.`,
+    description: `Chat via Instagram atau email — ${info.storeName} siap bantu jawab pertanyaanmu.`,
     url: "/contact",
     type: "website",
   },
 };
 
 export default function ContactPage() {
-  const waLink = `https://wa.me/${info.whatsapp}`;
+  const igDmLink = instagramMessageLink(info.socialMedia.instagram ?? INSTAGRAM_PROFILE_URL);
   const mapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(info.address)}`;
 
   return (
@@ -30,41 +31,30 @@ export default function ContactPage() {
 
       <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
         <a
-          href={waLink}
+          href={igDmLink}
           target="_blank"
           rel="noopener noreferrer"
           className="border-gold bg-gold/5 hover:bg-gold/10 flex flex-col gap-3 rounded-xl border-2 border-dashed p-6 transition-colors sm:col-span-2"
         >
           <span className="bg-ink flex h-11 w-11 items-center justify-center rounded-full text-white">
-            <MessageCircle className="h-5 w-5" aria-hidden="true" />
+            <Instagram className="h-5 w-5" aria-hidden="true" />
           </span>
           <div>
-            <p className="text-ink font-display text-lg font-semibold">Chat via WhatsApp</p>
+            <p className="text-ink font-display text-lg font-semibold">Chat via Instagram</p>
             <p className="text-slate mt-1 text-sm">
-              Cara tercepat untuk tanya-tanya atau pesan unit — {info.phone}
+              Cara tercepat untuk tanya-tanya atau pesan unit — @excebymn
             </p>
           </div>
         </a>
 
         <a
           href={`mailto:${info.email}`}
-          className="border-surface hover:border-gold flex items-start gap-3 rounded-xl border p-5 transition-colors"
+          className="border-surface hover:border-gold flex items-start gap-3 rounded-xl border p-5 transition-colors sm:col-span-2"
         >
           <Mail className="text-ink mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
           <div>
             <p className="text-ink text-sm font-semibold">Email</p>
             <p className="text-slate mt-0.5 text-sm">{info.email}</p>
-          </div>
-        </a>
-
-        <a
-          href={`tel:${info.phone}`}
-          className="border-surface hover:border-gold flex items-start gap-3 rounded-xl border p-5 transition-colors"
-        >
-          <Phone className="text-ink mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
-          <div>
-            <p className="text-ink text-sm font-semibold">Telepon</p>
-            <p className="text-slate mt-0.5 text-sm">{info.phone}</p>
           </div>
         </a>
 
