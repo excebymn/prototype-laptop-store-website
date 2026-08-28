@@ -1,0 +1,65 @@
+[
+  {
+    "id": "gd-001",
+    "slug": "pilih-laptop-untuk-kuliah",
+    "title": "Cara Memilih Laptop untuk Kuliah",
+    "category": "kebutuhan",
+    "excerpt": "Panduan singkat memilih laptop yang pas untuk kebutuhan tugas kuliah tanpa boros budget.",
+    "content": "Untuk kebutuhan kuliah, prioritaskan RAM minimal 8GB dan storage SSD supaya loading aplikasi terasa ringan. CPU kelas i3/Ryzen 3 generasi terbaru biasanya sudah cukup untuk office, browsing, dan video call.",
+    "publishedAt": "2026-06-01"
+  },
+  {
+    "id": "gd-002",
+    "slug": "laptop-untuk-programmer-pemula",
+    "title": "Spesifikasi Laptop Ideal untuk Programmer Pemula",
+    "category": "kebutuhan",
+    "excerpt": "Apa saja spesifikasi yang perlu diperhatikan sebelum beli laptop untuk belajar coding.",
+    "content": "Programmer pemula sebaiknya mencari laptop dengan RAM minimal 8GB (idealnya 16GB kalau sering pakai emulator atau container), storage SSD, dan CPU minimal setara Core i5 generasi 10 ke atas.",
+    "publishedAt": "2026-06-10"
+  },
+  {
+    "id": "gd-003",
+    "slug": "perbedaan-ssd-dan-hdd",
+    "title": "Perbedaan SSD dan HDD, Mana yang Lebih Baik?",
+    "category": "hardware",
+    "excerpt": "Penjelasan sederhana soal SSD vs HDD dan dampaknya ke kecepatan laptop sehari-hari.",
+    "content": "SSD jauh lebih cepat dibanding HDD dalam hal boot up dan membuka aplikasi, karena tidak memakai komponen mekanis berputar. Laptop dengan SSD terasa jauh lebih responsif meski spesifikasi lain setara.",
+    "publishedAt": "2026-06-18"
+  },
+  {
+    "id": "gd-004",
+    "slug": "berapa-ram-yang-dibutuhkan",
+    "title": "Berapa RAM yang Sebenarnya Kamu Butuhkan?",
+    "category": "hardware",
+    "excerpt": "Panduan menentukan kapasitas RAM sesuai jenis pekerjaan sehari-hari.",
+    "content": "4GB RAM hanya cukup untuk kebutuhan dasar seperti mengetik dan browsing ringan. 8GB sudah nyaman untuk multitasking standar, sementara 16GB ke atas direkomendasikan untuk coding, editing, atau gaming.",
+    "publishedAt": "2026-06-25"
+  },
+  {
+    "id": "gd-005",
+    "slug": "cara-cek-kondisi-laptop-bekas",
+    "title": "Cara Cek Kondisi Laptop Bekas Sebelum Membeli",
+    "category": "buying-guide",
+    "excerpt": "Hal-hal penting yang wajib dicek supaya tidak kecewa saat beli laptop bekas.",
+    "content": "Cek kondisi baterai, keyboard, engsel layar, serta hasil stress test CPU dan GPU. Pastikan juga penjual transparan soal riwayat pemakaian dan memberikan garansi toko, bukan hanya garansi lisan.",
+    "publishedAt": "2026-07-02"
+  },
+  {
+    "id": "gd-006",
+    "slug": "apa-itu-like-new-qc-tested-ready-to-use",
+    "title": "Apa Bedanya Like New, QC Tested, dan Ready to Use?",
+    "category": "buying-guide",
+    "excerpt": "Penjelasan istilah kondisi laptop yang sering dipakai toko laptop bekas.",
+    "content": "Like New berarti kondisi sangat mulus dengan minim tanda pemakaian. QC Tested berarti unit sudah melalui pengecekan menyeluruh sebelum dijual. Ready to Use berarti unit siap pakai langsung meski tampilan fisik mungkin ada bekas pemakaian wajar.",
+    "publishedAt": "2026-07-15"
+  },
+  {
+    "id": "gd-007",
+    "slug": "tips-negosiasi-beli-laptop-bekas",
+    "title": "Tips Aman Negosiasi Beli Laptop Bekas",
+    "category": "buying-guide",
+    "excerpt": "Cara menawar dengan sopan tanpa mengorbankan kualitas unit yang didapat.",
+    "content": "Fokus negosiasi pada kelengkapan unit (charger, dus, aksesoris) dan garansi toko, bukan hanya harga. Bandingkan harga pasaran unit sejenis supaya tawaran tetap masuk akal bagi kedua pihak.",
+    "publishedAt": "2026-07-28"
+  }
+]

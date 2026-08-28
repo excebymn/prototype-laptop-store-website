@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+:root {
+  /* Ink & paper — primary text / background */
+  --color-ink: #16233a;
+  --color-paper: #f6f4ee;
+  --color-surface: #ede9df;
+
+  /* Accent — "quality stamp" gold, used sparingly for CTA & highlights */
+  --color-gold: #d1953a;
+  /* #906124 — sengaja lebih gelap dari turunan langsung #d1953a supaya teks
+     (badge kondisi, link, chip terpilih) tetap ≥4.5:1 di atas --color-paper,
+     memenuhi WCAG AA untuk teks kecil. Jangan diterangkan lagi tanpa cek ulang. */
+  --color-gold-dark: #906124;
+
+  /* Status — QC/available indicator */
+  --color-moss: #3f6d52;
+
+  /* Secondary text */
+  --color-slate: #5b6472;
+}
+
+@theme inline {
+  --color-ink: var(--color-ink);
+  --color-paper: var(--color-paper);
+  --color-surface: var(--color-surface);
+  --color-gold: var(--color-gold);
+  --color-gold-dark: var(--color-gold-dark);
+  --color-moss: var(--color-moss);
+  --color-slate: var(--color-slate);
+
+  --font-display: var(--font-space-grotesk);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-plex-mono);
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}

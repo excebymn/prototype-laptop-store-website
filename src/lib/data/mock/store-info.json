@@ -1,0 +1,17 @@
+{
+  "storeName": "Excebymn",
+  "tagline": "Discovery & guidance laptop bekas berkualitas — bukan sekadar jual-beli.",
+  "whatsapp": "6281234567890",
+  "phone": "+62 812-3456-7890",
+  "email": "halo@excebymn.id",
+  "address": "Jl. Raya Darmo No. 45, Surabaya, Jawa Timur",
+  "operatingHours": [
+    { "days": "Senin – Sabtu", "hours": "09.00 – 20.00 WIB" },
+    { "days": "Minggu", "hours": "10.00 – 17.00 WIB" }
+  ],
+  "socialMedia": {
+    "instagram": "https://instagram.com/excebymn",
+    "tiktok": "https://tiktok.com/@excebymn",
+    "facebook": "https://facebook.com/excebymn"
+  }
+}
