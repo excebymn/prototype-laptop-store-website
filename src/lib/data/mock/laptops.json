@@ -6,7 +6,10 @@
     "brand": "Lenovo",
     "price": 7500000,
     "condition": "like-new",
-    "categories": ["business", "programming"],
+    "categories": [
+      "business",
+      "programming"
+    ],
     "specs": {
       "cpu": "Intel Core i5-1135G7",
       "gpu": "Intel Iris Xe Graphics",
@@ -15,13 +18,24 @@
       "storageType": "SSD",
       "display": "14 inch FHD IPS",
       "battery": "Hingga 8 jam pemakaian normal",
-      "connectivity": ["WiFi 6", "Bluetooth 5.1", "USB-C", "HDMI"],
+      "connectivity": [
+        "WiFi 6",
+        "Bluetooth 5.1",
+        "USB-C",
+        "HDMI"
+      ],
       "os": "Windows 11 Pro",
       "weightKg": 1.4
     },
-    "images": ["/images/laptops/lenovo-thinkpad-t14-gen-2-1.jpg"],
+    "images": [
+      "/images/laptops/lenovo-thinkpad-t14-gen-2-1.jpg"
+    ],
     "description": "ThinkPad legendaris dengan keyboard nyaman dan build quality kelas bisnis. Cocok untuk kerja kantoran maupun ngoding harian.",
-    "whatsIncluded": ["Unit laptop", "Charger original", "Tas laptop"],
+    "whatsIncluded": [
+      "Unit laptop",
+      "Charger original",
+      "Tas laptop"
+    ],
     "isAvailable": true,
     "isFeatured": true,
     "createdAt": "2026-08-01"
@@ -33,7 +47,9 @@
     "brand": "Asus",
     "price": 12500000,
     "condition": "qc-tested",
-    "categories": ["gaming"],
+    "categories": [
+      "gaming"
+    ],
     "specs": {
       "cpu": "AMD Ryzen 7 5800H",
       "gpu": "NVIDIA RTX 3060 6GB",
@@ -42,13 +58,25 @@
       "storageType": "SSD",
       "display": "15.6 inch FHD 144Hz",
       "battery": "Hingga 5 jam pemakaian normal",
-      "connectivity": ["WiFi 6", "Bluetooth 5.2", "USB-C", "HDMI", "LAN"],
+      "connectivity": [
+        "WiFi 6",
+        "Bluetooth 5.2",
+        "USB-C",
+        "HDMI",
+        "LAN"
+      ],
       "os": "Windows 11 Home",
       "weightKg": 2.3
     },
-    "images": ["/images/laptops/asus-rog-strix-g15-1.jpg"],
+    "images": [
+      "/images/laptops/asus-rog-strix-g15-1.jpg"
+    ],
     "description": "Laptop gaming kencang buat main game AAA maupun rendering ringan. Sudah dites stabil di bawah beban tinggi.",
-    "whatsIncluded": ["Unit laptop", "Charger original", "Box original"],
+    "whatsIncluded": [
+      "Unit laptop",
+      "Charger original",
+      "Box original"
+    ],
     "isAvailable": true,
     "isFeatured": true,
     "createdAt": "2026-07-20"
@@ -60,7 +88,10 @@
     "brand": "Dell",
     "price": 4200000,
     "condition": "ready-to-use",
-    "categories": ["school", "everyday"],
+    "categories": [
+      "school",
+      "everyday"
+    ],
     "specs": {
       "cpu": "Intel Core i3-10110U",
       "gpu": "Intel UHD Graphics",
@@ -69,13 +100,23 @@
       "storageType": "SSD",
       "display": "14 inch HD",
       "battery": "Hingga 6 jam pemakaian normal",
-      "connectivity": ["WiFi 5", "Bluetooth 5.0", "USB-A", "HDMI"],
+      "connectivity": [
+        "WiFi 5",
+        "Bluetooth 5.0",
+        "USB-A",
+        "HDMI"
+      ],
       "os": "Windows 11 Home",
       "weightKg": 1.6
     },
-    "images": ["/images/laptops/dell-latitude-3410-1.jpg"],
+    "images": [
+      "/images/laptops/dell-latitude-3410-1.jpg"
+    ],
     "description": "Pilihan hemat untuk pelajar/mahasiswa. Ringan dibawa ke kampus, cukup untuk tugas kuliah dan browsing.",
-    "whatsIncluded": ["Unit laptop", "Charger original"],
+    "whatsIncluded": [
+      "Unit laptop",
+      "Charger original"
+    ],
     "isAvailable": true,
     "isFeatured": false,
     "createdAt": "2026-06-15"
@@ -87,7 +128,11 @@
     "brand": "Apple",
     "price": 10500000,
     "condition": "like-new",
-    "categories": ["creative", "programming", "everyday"],
+    "categories": [
+      "creative",
+      "programming",
+      "everyday"
+    ],
     "specs": {
       "cpu": "Apple M1 8-core",
       "gpu": "Apple M1 7-core GPU",
@@ -96,13 +141,22 @@
       "storageType": "SSD",
       "display": "13.3 inch Retina",
       "battery": "Hingga 15 jam pemakaian normal",
-      "connectivity": ["WiFi 6", "Bluetooth 5.0", "USB-C/Thunderbolt"],
+      "connectivity": [
+        "WiFi 6",
+        "Bluetooth 5.0",
+        "USB-C/Thunderbolt"
+      ],
       "os": "macOS",
       "weightKg": 1.29
     },
-    "images": ["/images/laptops/apple-macbook-air-m1-1.jpg"],
+    "images": [
+      "/images/laptops/apple-macbook-air-m1-1.jpg"
+    ],
     "description": "Ringan, silent (tanpa kipas), dan baterai tahan lama. Favorit untuk desain, editing ringan, dan coding.",
-    "whatsIncluded": ["Unit laptop", "Charger original"],
+    "whatsIncluded": [
+      "Unit laptop",
+      "Charger original"
+    ],
     "isAvailable": true,
     "isFeatured": true,
     "createdAt": "2026-08-10"
@@ -114,7 +168,10 @@
     "brand": "HP",
     "price": 6800000,
     "condition": "qc-tested",
-    "categories": ["programming", "everyday"],
+    "categories": [
+      "programming",
+      "everyday"
+    ],
     "specs": {
       "cpu": "Intel Core i5-1135G7",
       "gpu": "Intel Iris Xe Graphics",
@@ -123,13 +180,24 @@
       "storageType": "SSD",
       "display": "14 inch FHD IPS",
       "battery": "Hingga 7 jam pemakaian normal",
-      "connectivity": ["WiFi 6", "Bluetooth 5.0", "USB-C", "HDMI"],
+      "connectivity": [
+        "WiFi 6",
+        "Bluetooth 5.0",
+        "USB-C",
+        "HDMI"
+      ],
       "os": "Windows 11 Home",
       "weightKg": 1.46
     },
-    "images": ["/images/laptops/hp-pavilion-14-1.jpg"],
+    "images": [
+      "/images/laptops/hp-pavilion-14-1.jpg"
+    ],
     "description": "Desain tipis dengan layar tajam, nyaman untuk ngoding dan multitasking harian.",
-    "whatsIncluded": ["Unit laptop", "Charger original", "Sleeve case"],
+    "whatsIncluded": [
+      "Unit laptop",
+      "Charger original",
+      "Sleeve case"
+    ],
     "isAvailable": true,
     "isFeatured": false,
     "createdAt": "2026-07-05"
@@ -141,7 +209,10 @@
     "brand": "Acer",
     "price": 9800000,
     "condition": "qc-tested",
-    "categories": ["gaming", "programming"],
+    "categories": [
+      "gaming",
+      "programming"
+    ],
     "specs": {
       "cpu": "Intel Core i5-11400H",
       "gpu": "NVIDIA RTX 3050 4GB",
@@ -150,13 +221,24 @@
       "storageType": "SSD",
       "display": "15.6 inch FHD 144Hz",
       "battery": "Hingga 5 jam pemakaian normal",
-      "connectivity": ["WiFi 6", "Bluetooth 5.1", "USB-C", "HDMI", "LAN"],
+      "connectivity": [
+        "WiFi 6",
+        "Bluetooth 5.1",
+        "USB-C",
+        "HDMI",
+        "LAN"
+      ],
       "os": "Windows 11 Home",
       "weightKg": 2.5
     },
-    "images": ["/images/laptops/acer-nitro-5-1.jpg"],
+    "images": [
+      "/images/laptops/acer-nitro-5-1.jpg"
+    ],
     "description": "Gaming laptop dengan harga lebih terjangkau, tetap kuat untuk game esport maupun kompilasi kode berat.",
-    "whatsIncluded": ["Unit laptop", "Charger original"],
+    "whatsIncluded": [
+      "Unit laptop",
+      "Charger original"
+    ],
     "isAvailable": true,
     "isFeatured": false,
     "createdAt": "2026-05-28"
@@ -168,7 +250,10 @@
     "brand": "Asus",
     "price": 3600000,
     "condition": "ready-to-use",
-    "categories": ["school", "everyday"],
+    "categories": [
+      "school",
+      "everyday"
+    ],
     "specs": {
       "cpu": "Intel Celeron N4020",
       "gpu": "Intel UHD Graphics 600",
@@ -177,13 +262,22 @@
       "storageType": "SSD",
       "display": "14 inch HD",
       "battery": "Hingga 6 jam pemakaian normal",
-      "connectivity": ["WiFi 5", "Bluetooth 4.2", "USB-A"],
+      "connectivity": [
+        "WiFi 5",
+        "Bluetooth 4.2",
+        "USB-A"
+      ],
       "os": "Windows 11 Home",
       "weightKg": 1.5
     },
-    "images": ["/images/laptops/asus-vivobook-14-1.jpg"],
+    "images": [
+      "/images/laptops/asus-vivobook-14-1.jpg"
+    ],
     "description": "Laptop entry-level paling hemat, pas buat kebutuhan sekolah: office, browsing, dan video call.",
-    "whatsIncluded": ["Unit laptop", "Charger original"],
+    "whatsIncluded": [
+      "Unit laptop",
+      "Charger original"
+    ],
     "isAvailable": true,
     "isFeatured": false,
     "createdAt": "2026-04-18"
@@ -195,7 +289,11 @@
     "brand": "Dell",
     "price": 13200000,
     "condition": "like-new",
-    "categories": ["creative", "business", "programming"],
+    "categories": [
+      "creative",
+      "business",
+      "programming"
+    ],
     "specs": {
       "cpu": "Intel Core i7-1165G7",
       "gpu": "Intel Iris Xe Graphics",
@@ -204,13 +302,23 @@
       "storageType": "SSD",
       "display": "13.4 inch FHD+ InfinityEdge",
       "battery": "Hingga 10 jam pemakaian normal",
-      "connectivity": ["WiFi 6", "Bluetooth 5.1", "USB-C/Thunderbolt"],
+      "connectivity": [
+        "WiFi 6",
+        "Bluetooth 5.1",
+        "USB-C/Thunderbolt"
+      ],
       "os": "Windows 11 Pro",
       "weightKg": 1.27
     },
-    "images": ["/images/laptops/dell-xps-13-1.jpg"],
+    "images": [
+      "/images/laptops/dell-xps-13-1.jpg"
+    ],
     "description": "Layar nyaris tanpa bezel dan build premium. Pilihan solid untuk desain, presentasi klien, dan kerja profesional.",
-    "whatsIncluded": ["Unit laptop", "Charger original", "Box original"],
+    "whatsIncluded": [
+      "Unit laptop",
+      "Charger original",
+      "Box original"
+    ],
     "isAvailable": false,
     "isFeatured": false,
     "createdAt": "2026-03-22"
@@ -222,7 +330,10 @@
     "brand": "MSI",
     "price": 5900000,
     "condition": "qc-tested",
-    "categories": ["everyday", "business"],
+    "categories": [
+      "everyday",
+      "business"
+    ],
     "specs": {
       "cpu": "Intel Core i3-1115G4",
       "gpu": "Intel UHD Graphics",
@@ -231,13 +342,23 @@
       "storageType": "SSD",
       "display": "14 inch FHD IPS",
       "battery": "Hingga 7 jam pemakaian normal",
-      "connectivity": ["WiFi 5", "Bluetooth 5.0", "USB-C", "HDMI"],
+      "connectivity": [
+        "WiFi 5",
+        "Bluetooth 5.0",
+        "USB-C",
+        "HDMI"
+      ],
       "os": "Windows 11 Home",
       "weightKg": 1.3
     },
-    "images": ["/images/laptops/msi-modern-14-1.jpg"],
+    "images": [
+      "/images/laptops/msi-modern-14-1.jpg"
+    ],
     "description": "Ringan dan simpel, cocok untuk kebutuhan kerja harian dan mobilitas tinggi.",
-    "whatsIncluded": ["Unit laptop", "Charger original"],
+    "whatsIncluded": [
+      "Unit laptop",
+      "Charger original"
+    ],
     "isAvailable": true,
     "isFeatured": false,
     "createdAt": "2026-08-15"
@@ -249,7 +370,10 @@
     "brand": "Lenovo",
     "price": 14800000,
     "condition": "like-new",
-    "categories": ["gaming", "creative"],
+    "categories": [
+      "gaming",
+      "creative"
+    ],
     "specs": {
       "cpu": "AMD Ryzen 7 5800H",
       "gpu": "NVIDIA RTX 3070 8GB",
@@ -258,15 +382,315 @@
       "storageType": "SSD",
       "display": "15.6 inch QHD 165Hz",
       "battery": "Hingga 6 jam pemakaian normal",
-      "connectivity": ["WiFi 6", "Bluetooth 5.1", "USB-C", "HDMI", "LAN"],
+      "connectivity": [
+        "WiFi 6",
+        "Bluetooth 5.1",
+        "USB-C",
+        "HDMI",
+        "LAN"
+      ],
       "os": "Windows 11 Home",
       "weightKg": 2.4
     },
-    "images": ["/images/laptops/lenovo-legion-5-1.jpg"],
+    "images": [
+      "/images/laptops/lenovo-legion-5-1.jpg"
+    ],
     "description": "Spek paling tinggi di katalog — kuat untuk gaming berat, render 3D, maupun editing video.",
-    "whatsIncluded": ["Unit laptop", "Charger original", "Mousepad"],
+    "whatsIncluded": [
+      "Unit laptop",
+      "Charger original",
+      "Mousepad"
+    ],
     "isAvailable": true,
     "isFeatured": true,
     "createdAt": "2026-08-22"
+  },
+  {
+    "id": "lp-011",
+    "slug": "hp-elitebook-840-g8-business",
+    "name": "HP EliteBook 840 G8",
+    "brand": "HP",
+    "price": 8900000,
+    "condition": "like-new",
+    "categories": [
+      "business",
+      "programming"
+    ],
+    "specs": {
+      "cpu": "Intel Core i5-1145G7",
+      "gpu": "Intel Iris Xe Graphics",
+      "ramGb": 16,
+      "storageGb": 512,
+      "storageType": "SSD",
+      "display": "14 inch FHD IPS anti-glare",
+      "battery": "Hingga 9 jam pemakaian normal",
+      "connectivity": [
+        "WiFi 6",
+        "Bluetooth 5.2",
+        "USB-C/Thunderbolt 4",
+        "HDMI"
+      ],
+      "os": "Windows 11 Pro",
+      "weightKg": 1.36
+    },
+    "images": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/HP_EliteBook_840_G8.png"
+    ],
+    "description": "EliteBook seri bisnis dengan sertifikasi militer, cocok untuk profesional yang butuh keamanan ekstra (fingerprint + privacy screen) dan performa stabil untuk kerja multitasking.",
+    "whatsIncluded": [
+      "Unit laptop",
+      "Charger original",
+      "Tas laptop"
+    ],
+    "isAvailable": true,
+    "isFeatured": false,
+    "createdAt": "2026-08-20"
+  },
+  {
+    "id": "lp-012",
+    "slug": "hp-elitebook-850-g5-office",
+    "name": "HP EliteBook 850 G5",
+    "brand": "HP",
+    "price": 5600000,
+    "condition": "qc-tested",
+    "categories": [
+      "business",
+      "everyday"
+    ],
+    "specs": {
+      "cpu": "Intel Core i5-8250U",
+      "gpu": "Intel UHD Graphics 620",
+      "ramGb": 8,
+      "storageGb": 256,
+      "storageType": "SSD",
+      "display": "15.6 inch FHD IPS",
+      "battery": "Hingga 7 jam pemakaian normal",
+      "connectivity": [
+        "WiFi 5",
+        "Bluetooth 5.0",
+        "USB-C",
+        "HDMI",
+        "LAN"
+      ],
+      "os": "Windows 11 Pro",
+      "weightKg": 1.9
+    },
+    "images": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/HP_EliteBook_850_G5.png"
+    ],
+    "description": "Laptop kantoran layar lebar 15.6 inch, port lengkap termasuk LAN, cocok untuk kerja di kantor maupun WFH dengan banyak dokumen terbuka sekaligus.",
+    "whatsIncluded": [
+      "Unit laptop",
+      "Charger original"
+    ],
+    "isAvailable": true,
+    "isFeatured": false,
+    "createdAt": "2026-07-30"
+  },
+  {
+    "id": "lp-013",
+    "slug": "apple-macbook-pro-14-m1-pro",
+    "name": "Apple MacBook Pro 14 M1 Pro",
+    "brand": "Apple",
+    "price": 21500000,
+    "condition": "like-new",
+    "categories": [
+      "creative",
+      "programming"
+    ],
+    "specs": {
+      "cpu": "Apple M1 Pro 10-core",
+      "gpu": "Apple M1 Pro 16-core GPU",
+      "ramGb": 16,
+      "storageGb": 512,
+      "storageType": "SSD",
+      "display": "14.2 inch Liquid Retina XDR",
+      "battery": "Hingga 17 jam pemakaian normal",
+      "connectivity": [
+        "WiFi 6",
+        "Bluetooth 5.0",
+        "USB-C/Thunderbolt 4",
+        "HDMI",
+        "SDXC"
+      ],
+      "os": "macOS",
+      "weightKg": 1.6
+    },
+    "images": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/A_2021_14-inch_Silver_MacBook_Pro.jpg"
+    ],
+    "description": "Powerhouse untuk video editing, color grading, dan development berat. Layar Liquid Retina XDR sangat akurat untuk kerja kreatif profesional.",
+    "whatsIncluded": [
+      "Unit laptop",
+      "Charger original 96W",
+      "Box original"
+    ],
+    "isAvailable": true,
+    "isFeatured": true,
+    "createdAt": "2026-08-24"
+  },
+  {
+    "id": "lp-014",
+    "slug": "samsung-galaxy-book-everyday",
+    "name": "Samsung Galaxy Book",
+    "brand": "Samsung",
+    "price": 6200000,
+    "condition": "qc-tested",
+    "categories": [
+      "everyday",
+      "business"
+    ],
+    "specs": {
+      "cpu": "Intel Core i5-1135G7",
+      "gpu": "Intel Iris Xe Graphics",
+      "ramGb": 8,
+      "storageGb": 256,
+      "storageType": "SSD",
+      "display": "15.6 inch FHD",
+      "battery": "Hingga 10 jam pemakaian normal",
+      "connectivity": [
+        "WiFi 6",
+        "Bluetooth 5.0",
+        "USB-C",
+        "USB-A",
+        "HDMI"
+      ],
+      "os": "Windows 11 Home",
+      "weightKg": 1.55
+    },
+    "images": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Samsung_Galaxy_Book.jpg"
+    ],
+    "description": "Desain tipis ala Samsung dengan integrasi yang mulus ke perangkat Galaxy lainnya (Quick Share, Link to Windows). Baterai awet untuk seharian kerja.",
+    "whatsIncluded": [
+      "Unit laptop",
+      "Charger original"
+    ],
+    "isAvailable": true,
+    "isFeatured": false,
+    "createdAt": "2026-08-05"
+  },
+  {
+    "id": "lp-015",
+    "slug": "microsoft-surface-laptop-7-premium",
+    "name": "Microsoft Surface Laptop 7",
+    "brand": "Microsoft",
+    "price": 15800000,
+    "condition": "like-new",
+    "categories": [
+      "business",
+      "creative"
+    ],
+    "specs": {
+      "cpu": "Qualcomm Snapdragon X Elite",
+      "gpu": "Qualcomm Adreno GPU",
+      "ramGb": 16,
+      "storageGb": 512,
+      "storageType": "SSD",
+      "display": "13.8 inch PixelSense Touch",
+      "battery": "Hingga 20 jam pemakaian normal",
+      "connectivity": [
+        "WiFi 6E",
+        "Bluetooth 5.3",
+        "USB-C/Thunderbolt",
+        "USB-A"
+      ],
+      "os": "Windows 11 Pro",
+      "weightKg": 1.34
+    },
+    "images": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Microsoft_Surface_Laptop_7.jpg"
+    ],
+    "description": "Ultrabook premium layar sentuh dengan chip ARM hemat daya, baterai super awet dan build quality alumunium solid. Cocok untuk profesional yang mobile.",
+    "whatsIncluded": [
+      "Unit laptop",
+      "Charger original",
+      "Box original"
+    ],
+    "isAvailable": true,
+    "isFeatured": true,
+    "createdAt": "2026-08-18"
+  },
+  {
+    "id": "lp-016",
+    "slug": "acer-chromebook-15-school",
+    "name": "Acer Chromebook 15",
+    "brand": "Acer",
+    "price": 2800000,
+    "condition": "ready-to-use",
+    "categories": [
+      "school",
+      "everyday"
+    ],
+    "specs": {
+      "cpu": "Intel Celeron N3060",
+      "gpu": "Intel HD Graphics 400",
+      "ramGb": 4,
+      "storageGb": 32,
+      "storageType": "eMMC",
+      "display": "15.6 inch HD",
+      "battery": "Hingga 10 jam pemakaian normal",
+      "connectivity": [
+        "WiFi 5",
+        "Bluetooth 4.2",
+        "USB-A",
+        "HDMI"
+      ],
+      "os": "ChromeOS",
+      "weightKg": 2.19
+    },
+    "images": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Acer_Chromebook_15_CB3-532%2C_Winschoten_%282021%29_03.jpg"
+    ],
+    "description": "Paling ringan di kantong, boot cepat, dan aman dari virus karena ChromeOS. Ideal untuk siswa yang kebutuhannya sebatas Google Docs, Zoom, dan browsing.",
+    "whatsIncluded": [
+      "Unit laptop",
+      "Charger original"
+    ],
+    "isAvailable": true,
+    "isFeatured": false,
+    "createdAt": "2026-06-02"
+  },
+  {
+    "id": "lp-017",
+    "slug": "lenovo-thinkpad-x1-carbon-gen7",
+    "name": "Lenovo ThinkPad X1 Carbon Gen 7",
+    "brand": "Lenovo",
+    "price": 11800000,
+    "condition": "like-new",
+    "categories": [
+      "business",
+      "programming"
+    ],
+    "specs": {
+      "cpu": "Intel Core i7-8665U",
+      "gpu": "Intel UHD Graphics 620",
+      "ramGb": 16,
+      "storageGb": 512,
+      "storageType": "SSD",
+      "display": "14 inch FHD IPS anti-glare",
+      "battery": "Hingga 13 jam pemakaian normal",
+      "connectivity": [
+        "WiFi 6",
+        "Bluetooth 5.0",
+        "USB-C/Thunderbolt 3",
+        "USB-A",
+        "HDMI"
+      ],
+      "os": "Windows 11 Pro",
+      "weightKg": 1.08
+    },
+    "images": [
+      "https://commons.wikimedia.org/wiki/Special:FilePath/ThinkPad_X1_Carbon_gen7_(1).jpg"
+    ],
+    "description": "Flagship ThinkPad berbahan carbon fiber, salah satu laptop bisnis paling ringan di kelasnya. Keyboard terbaik di kelasnya, cocok untuk coding dan kerja intensif.",
+    "whatsIncluded": [
+      "Unit laptop",
+      "Charger original",
+      "Tas laptop"
+    ],
+    "isAvailable": true,
+    "isFeatured": true,
+    "createdAt": "2026-08-26"
   }
 ]
