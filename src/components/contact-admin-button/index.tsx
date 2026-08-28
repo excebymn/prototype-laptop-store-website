@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Instagram } from "lucide-react";
+import { InstagramIcon } from "@/components/icons/instagram-icon";
 import { buildLaptopShareText } from "@/lib/share-text";
 import { instagramMessageLink } from "@/lib/site";
 import type { Laptop } from "@/lib/data";
@@ -43,7 +43,7 @@ export function ContactAdminButton({ instagramUrl, laptop, className }: ContactA
         "bg-ink inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
       }
     >
-      <Instagram className="h-4 w-4" aria-hidden="true" />
+      <InstagramIcon className="h-4 w-4" aria-hidden="true" />
       {copied ? "Info disalin, buka DM..." : "Hubungi via Instagram"}
     </button>
   );

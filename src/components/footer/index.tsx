@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Instagram, Mail, MapPin } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
+import { InstagramIcon } from "@/components/icons/instagram-icon";
 import storeInfo from "@/lib/data/mock/store-info.json";
 import type { StoreInfo } from "@/lib/data";
 import { INSTAGRAM_PROFILE_URL, instagramMessageLink } from "@/lib/site";
@@ -48,7 +49,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="hover:text-paper flex items-start gap-2 transition-colors"
                 >
-                  <Instagram className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
+                  <InstagramIcon className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
                   <span>Instagram: @excebymn</span>
                 </a>
               </li>

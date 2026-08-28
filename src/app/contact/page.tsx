@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Instagram, Mail, MapPin } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
+import { InstagramIcon } from "@/components/icons/instagram-icon";
 import storeInfo from "@/lib/data/mock/store-info.json";
 import type { StoreInfo } from "@/lib/data";
 import { INSTAGRAM_PROFILE_URL, instagramMessageLink } from "@/lib/site";
@@ -37,7 +38,7 @@ export default function ContactPage() {
           className="border-gold bg-gold/5 hover:bg-gold/10 flex flex-col gap-3 rounded-xl border-2 border-dashed p-6 transition-colors sm:col-span-2"
         >
           <span className="bg-ink flex h-11 w-11 items-center justify-center rounded-full text-white">
-            <Instagram className="h-5 w-5" aria-hidden="true" />
+            <InstagramIcon className="h-5 w-5" aria-hidden="true" />
           </span>
           <div>
             <p className="text-ink font-display text-lg font-semibold">Chat via Instagram</p>

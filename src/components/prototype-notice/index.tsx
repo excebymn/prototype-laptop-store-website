@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Instagram, X } from "lucide-react";
+import { X } from "lucide-react";
+import { InstagramIcon } from "@/components/icons/instagram-icon";
 import storeInfo from "@/lib/data/mock/store-info.json";
 import type { StoreInfo } from "@/lib/data";
 import { SHOW_PROTOTYPE_NOTICE, INSTAGRAM_PROFILE_URL, instagramMessageLink } from "@/lib/site";
@@ -102,7 +103,7 @@ export function PrototypeNotice() {
             onClick={handleContact}
             className="bg-ink inline-flex flex-1 items-center justify-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
           >
-            <Instagram className="h-4 w-4" aria-hidden="true" />
+            <InstagramIcon className="h-4 w-4" aria-hidden="true" />
             Hubungi via Instagram
           </button>
           <button
