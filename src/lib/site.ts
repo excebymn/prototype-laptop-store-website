@@ -36,7 +36,7 @@ export function instagramMessageLink(profileUrl: string): string {
 export const LOGO_SRC: string | null = null;
 
 /** Foto hero beranda, mis. "/images/hero.jpg". `null` = pakai ilustrasi laptop sementara. */
-export const HERO_IMAGE_SRC: string | null = null;
+export const HERO_IMAGE_SRC: string | null = "/images/hero.jpg";
 
 /** Ubah ke `true` setelah foto produk (path di laptops.json `images`) benar-benar ada di public/. */
 export const PRODUCT_PHOTOS_READY = false;
