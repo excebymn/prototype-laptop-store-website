@@ -3,11 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, RotateCcw, SearchX } from "lucide-react";
-import { useFinderStore } from "@/store/useFinderStore";
-import { laptopRepository } from "@/lib/data";
-import { rankLaptops } from "@/lib/scoring/finder-score";
+import { useStore } from "@/store";
 import {
-  AVAILABLE_BRANDS,
   CATEGORY_OPTIONS,
   RAM_OPTIONS,
   STORAGE_OPTIONS,
@@ -31,7 +28,7 @@ const MAX_RESULTS_SHOWN = 6;
 function optionButtonClass(isSelected: boolean) {
   return `rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
     isSelected
-      ? "border-gold bg-gold/10 text-gold-dark"
+      ? "border-brand bg-brand/10 text-brand-dark"
       : "border-surface text-slate hover:border-ink hover:text-ink"
   }`;
 }
@@ -41,13 +38,15 @@ interface SmartFinderProps {
 }
 
 export function SmartFinder({ initialPurpose }: SmartFinderProps) {
-  const answers = useFinderStore((s) => s.answers);
-  const results = useFinderStore((s) => s.results);
-  const isCalculating = useFinderStore((s) => s.isCalculating);
-  const setAnswer = useFinderStore((s) => s.setAnswer);
-  const resetAnswers = useFinderStore((s) => s.resetAnswers);
-  const setResults = useFinderStore((s) => s.setResults);
-  const setIsCalculating = useFinderStore((s) => s.setIsCalculating);
+  const answers = useStore((s) => s.answers);
+  const results = useStore((s) => s.results);
+  const isCalculating = useStore((s) => s.isCalculating);
+  const finderError = useStore((s) => s.finderError);
+  const brands = useStore((s) => s.brands);
+  const setAnswer = useStore((s) => s.setAnswer);
+  const resetAnswers = useStore((s) => s.resetAnswers);
+  const runFinder = useStore((s) => s.runFinder);
+  const fetchBrands = useStore((s) => s.fetchBrands);
 
   const [stepIndex, setStepIndex] = useState(0);
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -63,6 +62,10 @@ export function SmartFinder({ initialPurpose }: SmartFinderProps) {
     }
   }, [initialPurpose, setAnswer]);
 
+  useEffect(() => {
+    void fetchBrands();
+  }, [fetchBrands]);
+
   const isLastStep = stepIndex === STEPS.length - 1;
   const currentStep = STEPS[stepIndex];
 
@@ -71,11 +74,7 @@ export function SmartFinder({ initialPurpose }: SmartFinderProps) {
   };
 
   const runSearch = async () => {
-    setIsCalculating(true);
-    const laptops = await laptopRepository.getAll();
-    const ranked = rankLaptops(laptops, answers);
-    setResults(ranked);
-    setIsCalculating(false);
+    await runFinder();
     setHasSubmitted(true);
   };
 
@@ -111,6 +110,23 @@ export function SmartFinder({ initialPurpose }: SmartFinderProps) {
 
   if (hasSubmitted) {
     const topResults = results.slice(0, MAX_RESULTS_SHOWN);
+
+    if (finderError) {
+      return (
+        <div className="flex flex-col items-center gap-3 py-16 text-center">
+          <SearchX className="text-slate h-10 w-10" aria-hidden="true" />
+          <p className="text-ink font-medium">{finderError}</p>
+          <button
+            type="button"
+            onClick={() => void runSearch()}
+            className="border-ink text-ink inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold"
+          >
+            <RotateCcw className="h-4 w-4" aria-hidden="true" />
+            Coba Lagi
+          </button>
+        </div>
+      );
+    }
 
     if (topResults.length === 0) {
       return (
@@ -174,7 +190,7 @@ export function SmartFinder({ initialPurpose }: SmartFinderProps) {
           <span
             key={step.id}
             className={`h-1.5 rounded-full transition-all ${
-              index === stepIndex ? "bg-gold w-6" : index < stepIndex ? "bg-gold/50 w-1.5" : "bg-surface w-1.5"
+              index === stepIndex ? "bg-brand w-6" : index < stepIndex ? "bg-brand/50 w-1.5" : "bg-surface w-1.5"
             }`}
           />
         ))}
@@ -248,7 +264,7 @@ export function SmartFinder({ initialPurpose }: SmartFinderProps) {
 
         {currentStep.id === "brand" && (
           <div className="flex flex-wrap justify-center gap-2">
-            {AVAILABLE_BRANDS.map((brand) => (
+            {brands.map((brand) => (
               <button
                 key={brand}
                 type="button"

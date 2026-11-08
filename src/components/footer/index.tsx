@@ -1,20 +1,21 @@
 import Link from "next/link";
 import { Mail, MapPin } from "lucide-react";
 import { InstagramIcon } from "@/components/icons/instagram-icon";
-import storeInfo from "@/lib/data/mock/store-info.json";
 import type { StoreInfo } from "@/lib/data";
+import { Logo } from "@/components/logo";
 import { INSTAGRAM_PROFILE_URL, instagramMessageLink } from "@/lib/site";
-
-const info = storeInfo as StoreInfo;
 
 const NAV_LINKS = [
   { href: "/laptops", label: "Laptops" },
   { href: "/finder", label: "Finder" },
   { href: "/compare", label: "Compare" },
   { href: "/guide", label: "Guide" },
+  { href: "/locations", label: "Lokasi" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ];
 
-export function Footer() {
+export function Footer({ info }: { info: StoreInfo }) {
   const igDmLink = instagramMessageLink(info.socialMedia.instagram ?? INSTAGRAM_PROFILE_URL);
 
   return (
@@ -22,12 +23,12 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <span className="font-display text-paper text-lg font-semibold">{info.storeName}</span>
+            <Logo name={info.storeName} tone="light" />
             <p className="text-paper/60 mt-3 text-sm leading-relaxed">{info.tagline}</p>
           </div>
 
           <div>
-            <h3 className="text-gold text-xs font-semibold tracking-wide uppercase">Jelajahi</h3>
+            <h3 className="text-sky text-xs font-semibold tracking-wide uppercase">Jelajahi</h3>
             <ul className="mt-3 space-y-2 text-sm">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
@@ -40,7 +41,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-gold text-xs font-semibold tracking-wide uppercase">Kontak</h3>
+            <h3 className="text-sky text-xs font-semibold tracking-wide uppercase">Kontak</h3>
             <ul className="mt-3 space-y-2 text-sm">
               <li>
                 <a
@@ -70,7 +71,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-gold text-xs font-semibold tracking-wide uppercase">
+            <h3 className="text-sky text-xs font-semibold tracking-wide uppercase">
               Jam Operasional
             </h3>
             <ul className="mt-3 space-y-1 text-sm">
@@ -88,7 +89,7 @@ export function Footer() {
                   href={info.socialMedia.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border-paper/20 hover:border-gold hover:text-gold rounded-full border px-3 py-1 text-xs transition-colors"
+                  className="border-paper/20 hover:border-sky hover:text-sky rounded-full border px-3 py-1 text-xs transition-colors"
                 >
                   Instagram
                 </a>
@@ -98,7 +99,7 @@ export function Footer() {
                   href={info.socialMedia.tiktok}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border-paper/20 hover:border-gold hover:text-gold rounded-full border px-3 py-1 text-xs transition-colors"
+                  className="border-paper/20 hover:border-sky hover:text-sky rounded-full border px-3 py-1 text-xs transition-colors"
                 >
                   TikTok
                 </a>
@@ -108,7 +109,7 @@ export function Footer() {
                   href={info.socialMedia.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border-paper/20 hover:border-gold hover:text-gold rounded-full border px-3 py-1 text-xs transition-colors"
+                  className="border-paper/20 hover:border-sky hover:text-sky rounded-full border px-3 py-1 text-xs transition-colors"
                 >
                   Facebook
                 </a>

@@ -3,7 +3,7 @@
 import { Suspense, useEffect, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ChevronLeft, ChevronRight, PackageX } from "lucide-react";
-import { useLaptopStore } from "@/store/useLaptopStore";
+import { useStore } from "@/store";
 import { LaptopCard } from "@/components/laptop-card";
 import { LaptopFilters } from "@/components/laptop-filters";
 import { buildCatalogQueryString, parseCatalogSearchParams } from "@/lib/catalog-query";
@@ -23,10 +23,13 @@ function LaptopsPageContent() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const laptops = useLaptopStore((s) => s.laptops);
-  const isLoading = useLaptopStore((s) => s.isLoading);
-  const filters = useLaptopStore((s) => s.filters);
-  const setFilters = useLaptopStore((s) => s.setFilters);
+  const laptops = useStore((s) => s.laptops);
+  const isLoading = useStore((s) => s.isLoading);
+  const catalogError = useStore((s) => s.catalogError);
+  const filters = useStore((s) => s.filters);
+  const setFilters = useStore((s) => s.setFilters);
+  const fetchLaptops = useStore((s) => s.fetchLaptops);
+  const fetchBrands = useStore((s) => s.fetchBrands);
 
   const [page, setPage] = useState(() => parseCatalogSearchParams(searchParams).page);
   const hasHydrated = useRef(false);
@@ -37,6 +40,7 @@ function LaptopsPageContent() {
   useEffect(() => {
     const { filters: initialFilters } = parseCatalogSearchParams(searchParams);
     setFilters(initialFilters);
+    void fetchBrands();
     hasHydrated.current = true;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -107,6 +111,18 @@ function LaptopsPageContent() {
 
           {isLoading ? (
             <div className="text-slate py-20 text-center text-sm">Memuat laptop...</div>
+          ) : catalogError ? (
+            <div className="flex flex-col items-center gap-3 py-20 text-center">
+              <PackageX className="text-slate h-10 w-10" aria-hidden="true" />
+              <p className="text-ink font-medium">{catalogError}</p>
+              <button
+                type="button"
+                onClick={() => void fetchLaptops()}
+                className="border-ink text-ink rounded-full border px-4 py-2 text-sm font-semibold"
+              >
+                Coba Lagi
+              </button>
+            </div>
           ) : laptops.length === 0 ? (
             <div className="flex flex-col items-center gap-3 py-20 text-center">
               <PackageX className="text-slate h-10 w-10" aria-hidden="true" />

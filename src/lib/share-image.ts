@@ -19,12 +19,12 @@ const HEIGHT = 1350;
 const PADDING = 64;
 
 const COLOR = {
-  ink: "#16233a",
-  paper: "#f6f4ee",
-  surface: "#ede9df",
-  gold: "#d1953a",
-  goldDark: "#a9722a",
-  slate: "#5b6472",
+  ink: "#003049",
+  paper: "#FBF2DF",
+  surface: "#E8D9B8",
+  brand: "#C1121F",
+  brandDark: "#AE1F23",
+  slate: "#46606F",
 };
 
 function drawRoundedRect(
@@ -70,14 +70,14 @@ function drawLaptopGlyph(ctx: CanvasRenderingContext2D, cx: number, cy: number, 
 function drawPlaceholderPanel(ctx: CanvasRenderingContext2D, laptop: Laptop, panelHeight: number) {
   const gradient = ctx.createLinearGradient(0, 0, WIDTH, panelHeight);
   gradient.addColorStop(0, COLOR.ink);
-  gradient.addColorStop(1, "#16233ab3");
+  gradient.addColorStop(1, "#003049b3");
   ctx.fillStyle = gradient;
   drawRoundedRect(ctx, PADDING, PADDING, WIDTH - PADDING * 2, panelHeight - PADDING, 24);
   ctx.fill();
 
   drawLaptopGlyph(ctx, WIDTH / 2, PADDING + (panelHeight - PADDING) / 2 + 40, 180);
 
-  // Badge kondisi, pojok kanan atas panel — meniru border-dashed di UI.
+  // Badge kondisi, pojok kanan atas panel — meniru di UI.
   ctx.font = "700 26px 'Inter', sans-serif";
   const badgeText = CONDITION_LABEL[laptop.condition];
   const badgeMetrics = ctx.measureText(badgeText);
@@ -90,20 +90,14 @@ function drawPlaceholderPanel(ctx: CanvasRenderingContext2D, laptop: Laptop, pan
   ctx.fillStyle = COLOR.paper;
   drawRoundedRect(ctx, badgeX, badgeY, badgeWidth, badgeHeight, 10);
   ctx.fill();
-  ctx.setLineDash([6, 5]);
-  ctx.lineWidth = 3;
-  ctx.strokeStyle = COLOR.gold;
-  drawRoundedRect(ctx, badgeX, badgeY, badgeWidth, badgeHeight, 10);
-  ctx.stroke();
-  ctx.setLineDash([]);
 
-  ctx.fillStyle = COLOR.goldDark;
+  ctx.fillStyle = COLOR.brandDark;
   ctx.textBaseline = "middle";
   ctx.fillText(badgeText, badgeX + badgePaddingX, badgeY + badgeHeight / 2 + 2);
 }
 
 function drawSpecRow(ctx: CanvasRenderingContext2D, x: number, y: number, label: string) {
-  ctx.fillStyle = COLOR.gold;
+  ctx.fillStyle = COLOR.brand;
   ctx.beginPath();
   ctx.arc(x + 6, y - 8, 6, 0, Math.PI * 2);
   ctx.fill();
@@ -145,7 +139,7 @@ export async function generateLaptopShareImage(laptop: Laptop, storeName: string
   cursorY += 62;
 
   ctx.fillStyle = COLOR.ink;
-  ctx.font = "700 56px 'Space Grotesk', sans-serif";
+  ctx.font = "800 56px 'Barlow Condensed', sans-serif";
   cursorY = drawWrappedText(ctx, laptop.name, PADDING, cursorY, WIDTH - PADDING * 2, 62);
   cursorY += 20;
 

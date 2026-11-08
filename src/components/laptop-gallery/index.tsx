@@ -24,7 +24,7 @@ export function LaptopGallery({ images, condition }: LaptopGalleryProps) {
       <div className="from-ink to-ink/70 border-surface relative flex aspect-4/3 items-center justify-center rounded-xl border bg-gradient-to-br">
         <LaptopIcon className="h-16 w-16 text-white/30" aria-hidden="true" />
         <span
-          className={`bg-paper absolute top-3 right-3 rounded-md border-2 border-dashed px-2 py-1 text-xs font-bold ${CONDITION_STYLE[condition]}`}
+          className={`absolute top-3 right-3 rounded-full px-3 py-1 text-xs font-semibold ${CONDITION_STYLE[condition]}`}
         >
           {CONDITION_LABEL[condition]}
         </span>
@@ -45,7 +45,7 @@ export function LaptopGallery({ images, condition }: LaptopGalleryProps) {
               aria-label={`Lihat foto ${index + 1}`}
               aria-pressed={activeIndex === index}
               className={`from-ink to-ink/70 flex h-16 w-16 shrink-0 items-center justify-center rounded-lg border bg-gradient-to-br ${
-                activeIndex === index ? "border-gold" : "border-surface opacity-60"
+                activeIndex === index ? "border-brand" : "border-surface opacity-60"
               }`}
             >
               <LaptopIcon className="h-5 w-5 text-white/30" aria-hidden="true" />

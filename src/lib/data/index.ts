@@ -1,18 +1,22 @@
 // Active repository instances.
 //
-// This is the single place that decides where data comes from. Store and
-// components only ever import from here, never from `mock-repository.ts`
-// or `mock/*.json` directly.
+// Ini satu-satunya tempat yang menentukan dari mana data datang. Store dan
+// halaman hanya import dari sini — tidak pernah dari `mock-repository.ts`
+// atau `mock/*.json` secara langsung.
 //
-// Migrating to Supabase later: create `SupabaseLaptopRepository` /
-// `SupabaseGuideRepository` implementing the interfaces in `repository.ts`,
-// then swap the two lines below.
+// Pindah ke Supabase: buat `supabase-repository.ts` (lihat SUPABASE.md),
+// lalu ganti tiga baris `new Mock...()` di bawah.
 
-import { MockGuideRepository, MockLaptopRepository } from "./mock-repository";
-import type { GuideRepository, LaptopRepository } from "./repository";
+import {
+  MockGuideRepository,
+  MockLaptopRepository,
+  MockStoreInfoRepository,
+} from "./mock-repository";
+import type { GuideRepository, LaptopRepository, StoreInfoRepository } from "./repository";
 
 export const laptopRepository: LaptopRepository = new MockLaptopRepository();
 export const guideRepository: GuideRepository = new MockGuideRepository();
+export const storeInfoRepository: StoreInfoRepository = new MockStoreInfoRepository();
 
 export type {
   Category,
@@ -24,5 +28,6 @@ export type {
   Laptop,
   LaptopFilters,
   LaptopSpecs,
+  StoreBranch,
   StoreInfo,
 } from "./types";

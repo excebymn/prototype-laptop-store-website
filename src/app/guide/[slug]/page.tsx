@@ -51,7 +51,7 @@ export default async function GuideDetailPage({ params }: GuideDetailPageProps) 
       </Link>
 
       <div className="mt-6">
-        <span className="border-gold text-gold-dark inline-block rounded-md border-2 border-dashed px-2 py-1 text-xs font-bold">
+        <span className="text-brand-dark text-xs font-semibold tracking-wide uppercase">
           {GUIDE_CATEGORY_LABEL[guide.category]}
         </span>
         <h1 className="font-display text-ink mt-3 text-2xl font-semibold sm:text-3xl">

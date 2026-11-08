@@ -1,12 +1,12 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight, Compass, GraduationCap, MessageCircle } from "lucide-react";
-import storeInfo from "@/lib/data/mock/store-info.json";
-import type { StoreInfo } from "@/lib/data";
+import { storeInfoRepository } from "@/lib/data";
 
-const info = storeInfo as StoreInfo;
+export async function generateMetadata(): Promise<Metadata> {
+  const info = await storeInfoRepository.get();
 
-export const metadata: Metadata = {
+  return {
   title: "Tentang Kami",
   description: info.tagline,
   alternates: { canonical: "/about" },
@@ -17,6 +17,7 @@ export const metadata: Metadata = {
     type: "website",
   },
 };
+}
 
 // Tiga pilar produk dari Perencanaan §1 — dijadikan konten utama About,
 // supaya konsisten dengan filosofi yang sudah dirancang, bukan sekadar
@@ -42,7 +43,9 @@ const PILLARS = [
   },
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const info = await storeInfoRepository.get();
+
   return (
     <main className="flex flex-1 flex-col">
       <section className="mx-auto w-full max-w-3xl px-4 pt-14 pb-4 text-center sm:px-6 lg:px-8">
@@ -60,7 +63,7 @@ export default function AboutPage() {
           <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-3">
             {PILLARS.map(({ icon: Icon, title, description }) => (
               <div key={title} className="border-surface rounded-xl border p-6 text-center">
-                <span className="border-gold text-gold-dark mx-auto flex h-12 w-12 items-center justify-center rounded-full border-2 border-dashed">
+                <span className="bg-sky-soft text-ink mx-auto flex h-12 w-12 items-center justify-center rounded-full">
                   <Icon className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <h3 className="font-display text-ink mt-4 text-base font-semibold">{title}</h3>
@@ -82,9 +85,9 @@ export default function AboutPage() {
           <div className="flex flex-wrap justify-center gap-3">
             <Link
               href="/finder"
-              className="bg-gold text-ink rounded-full px-5 py-3 text-sm font-semibold transition-opacity hover:opacity-90"
+              className="bg-brand text-white rounded-full px-5 py-3 text-sm font-semibold transition-opacity hover:opacity-90"
             >
-              ✨ Smart Finder
+              Smart Finder
             </Link>
             <Link
               href="/contact"

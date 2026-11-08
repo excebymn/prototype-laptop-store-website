@@ -1,13 +1,21 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import { Scale, Trash2 } from "lucide-react";
-import { useCompareStore } from "@/store/useCompareStore";
+import { useStore } from "@/store";
 import { CompareTable } from "@/components/compare-table";
 
 export default function ComparePage() {
-  const slots = useCompareStore((state) => state.slots);
-  const clearCompare = useCompareStore((state) => state.clearCompare);
+  const slots = useStore((state) => state.slots);
+  const clearCompare = useStore((state) => state.clearCompare);
+  const refreshCompare = useStore((state) => state.refreshCompare);
+
+  // Segarkan harga/stok laptop di slot dari repository setiap halaman dibuka.
+  useEffect(() => {
+    void refreshCompare();
+  }, [refreshCompare]);
+
   const hasAnyLaptop = slots.some((slot) => slot !== null);
 
   return (

@@ -1,15 +1,19 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter, IBM_Plex_Mono } from "next/font/google";
+import { Barlow_Condensed, Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { PrototypeNotice } from "@/components/prototype-notice";
+import { MobileContactBar } from "@/components/mobile-contact-bar";
+import { MotionProvider } from "@/components/motion";
+import { storeInfoRepository } from "@/lib/data";
 import { SITE_URL } from "@/lib/site";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+// Font heading: condensed tebal ala poster toko. Dipakai lewat `font-display`.
+const barlow = Barlow_Condensed({
+  variable: "--font-barlow",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["600", "700", "800"],
 });
 
 const inter = Inter({
@@ -73,17 +77,22 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const info = await storeInfoRepository.get();
+
   return (
     <html
       lang="id"
-      className={`${spaceGrotesk.variable} ${inter.variable} ${plexMono.variable} h-full antialiased`}
+      className={`${barlow.variable} ${inter.variable} ${plexMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">
-        <Navbar />
-        <div className="flex flex-1 flex-col">{children}</div>
-        <Footer />
-        <PrototypeNotice />
+      <body className="flex min-h-full flex-col pb-20 md:pb-0">
+        <MotionProvider>
+          <Navbar storeName={info.storeName} />
+          <div className="flex flex-1 flex-col">{children}</div>
+          <Footer info={info} />
+          <MobileContactBar info={info} />
+          <PrototypeNotice info={info} />
+        </MotionProvider>
       </body>
     </html>
   );

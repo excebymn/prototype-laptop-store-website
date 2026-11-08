@@ -42,7 +42,8 @@
 - **[Next.js](https://nextjs.org)** (App Router) — routing file-based, SEO & Open Graph per halaman, image generation lewat `next/og`
 - **[Zustand](https://zustand.docs.pmnd.rs)** — state store ringan per-domain (catalog, compare, finder)
 - **[Tailwind CSS](https://tailwindcss.com)** — styling dengan token warna & font custom (lihat `src/app/globals.css`)
-- **Repository pattern** — semua data (laptop, guide) diakses lewat satu lapisan abstraksi (`lib/data/repository.ts`), sekarang diimplementasikan dengan JSON lokal. Migrasi ke [Supabase](https://supabase.com) nanti tidak perlu ubah komponen/store — cukup ganti implementasi repository.
+- **Repository pattern** — semua data (laptop, guide, info toko) diakses lewat satu lapisan abstraksi (`lib/data/repository.ts`), sekarang diimplementasikan dengan JSON lokal. Migrasi ke [Supabase](https://supabase.com) tidak perlu ubah komponen/store — cukup ganti implementasi repository. Panduan lengkap + skema SQL + kode siap pakai: [`SUPABASE.md`](./SUPABASE.md).
+- **Satu store** — semua state client (katalog, compare, Smart Finder) ada di `useStore` (`src/store/index.ts`, dibagi jadi slice di `src/store/slices/`). Halaman server (home, detail, guide, sitemap, OG image) memanggil repository langsung karena Zustand hanya untuk client component.
 
 > Detail lengkap keputusan arsitektur ada di [`perencanaan-toko-laptop-bekas.md`](./perencanaan-toko-laptop-bekas.md).
 
@@ -90,7 +91,7 @@ Repo ini siap deploy ke [Vercel](https://vercel.com) tanpa konfigurasi tambahan 
 
 ## 📌 Status Data
 
-Data toko (nama, nomor WhatsApp, alamat, jam operasional) ada di `src/lib/data/mock/store-info.json` — masih data contoh, ganti dengan data asli sebelum go-live untuk klien. Katalog laptop & artikel guide juga masih dummy (`src/lib/data/mock/laptops.json`, `guides.json`) sampai terhubung ke Supabase.
+Data toko (nama, nomor WhatsApp, alamat, jam operasional) ada di `src/lib/data/mock/store-info.json` (dibaca lewat `storeInfoRepository`) — masih data contoh, ganti dengan data asli sebelum go-live untuk klien. Katalog laptop & artikel guide juga masih dummy (`src/lib/data/mock/laptops.json`, `guides.json`) sampai terhubung ke Supabase.
 
 ## 📄 Lisensi
 

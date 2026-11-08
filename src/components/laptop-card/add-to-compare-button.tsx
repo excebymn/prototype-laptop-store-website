@@ -1,7 +1,7 @@
 "use client";
 
 import { Scale } from "lucide-react";
-import { useCompareStore } from "@/store/useCompareStore";
+import { useStore } from "@/store";
 import type { Laptop } from "@/lib/data";
 
 interface AddToCompareButtonProps {
@@ -11,9 +11,9 @@ interface AddToCompareButtonProps {
 }
 
 export function AddToCompareButton({ laptop, variant = "icon" }: AddToCompareButtonProps) {
-  const isInCompare = useCompareStore((state) => state.isInCompare(laptop.id));
-  const addToCompare = useCompareStore((state) => state.addToCompare);
-  const removeFromCompare = useCompareStore((state) => state.removeFromCompare);
+  const isInCompare = useStore((state) => state.isInCompare(laptop.id));
+  const addToCompare = useStore((state) => state.addToCompare);
+  const removeFromCompare = useStore((state) => state.removeFromCompare);
 
   const handleClick = () => (isInCompare ? removeFromCompare(laptop.id) : addToCompare(laptop));
   const label = isInCompare ? "Hapus dari Compare" : "Tambah ke Compare";
@@ -26,7 +26,7 @@ export function AddToCompareButton({ laptop, variant = "icon" }: AddToCompareBut
         aria-pressed={isInCompare}
         className={`inline-flex items-center justify-center gap-2 rounded-full border px-5 py-3 text-sm font-semibold transition-colors ${
           isInCompare
-            ? "border-gold bg-gold/10 text-gold-dark"
+            ? "border-brand bg-brand/10 text-brand-dark"
             : "border-ink text-ink hover:bg-ink hover:text-white"
         }`}
       >
@@ -42,9 +42,9 @@ export function AddToCompareButton({ laptop, variant = "icon" }: AddToCompareBut
       onClick={handleClick}
       aria-pressed={isInCompare}
       aria-label={label}
-      className={`flex items-center justify-center rounded-md border px-3 transition-colors ${
+      className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full border transition-colors ${
         isInCompare
-          ? "border-gold bg-gold/10 text-gold-dark"
+          ? "border-brand bg-brand/10 text-brand-dark"
           : "border-surface text-slate hover:border-ink hover:text-ink"
       }`}
     >

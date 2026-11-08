@@ -1,41 +1,123 @@
 @import "tailwindcss";
 
 :root {
-  /* Ink & paper — primary text / background */
-  --color-ink: #16233a;
-  --color-paper: #f6f4ee;
-  --color-surface: #ede9df;
+  /* Palet: cream hangat + cosmos blue + crimson + blue marble. */
+  --color-ink: #003049; /* cosmos blue — teks utama & blok gelap */
+  --color-paper: #fbf2df; /* cream — latar halaman */
+  --color-card: #fffaf0; /* cream terang — kartu/permukaan */
+  --color-surface: #e8d9b8; /* cream gelap — garis & pembatas */
 
-  /* Accent — "quality stamp" gold, used sparingly for CTA & highlights */
-  --color-gold: #d1953a;
-  /* #906124 — sengaja lebih gelap dari turunan langsung #d1953a supaya teks
-     (badge kondisi, link, chip terpilih) tetap ≥4.5:1 di atas --color-paper,
-     memenuhi WCAG AA untuk teks kecil. Jangan diterangkan lagi tanpa cek ulang. */
-  --color-gold-dark: #906124;
+  --color-sky: #669bbc; /* blue marble — aksen sekunder */
+  --color-sky-soft: #dde9f1; /* blue marble tipis — latar panel/hero */
 
-  /* Status — QC/available indicator */
-  --color-moss: #3f6d52;
+  /* Merah brand.
+     brand      = latar tombol (teks putih di atasnya ≥4.5:1)
+     brand-dark = TEKS merah di atas cream/sky-soft (≥4.5:1)
+     deep       = blok merah tua (gochujang) untuk panel penekanan */
+  --color-brand: #c1121f;
+  --color-brand-dark: #ae1f23;
+  --color-deep: #780000;
 
-  /* Secondary text */
-  --color-slate: #5b6472;
+  --color-moss: #2f6b4f; /* status QC */
+  --color-slate: #46606f; /* teks sekunder */
 }
 
 @theme inline {
   --color-ink: var(--color-ink);
   --color-paper: var(--color-paper);
+  --color-card: var(--color-card);
   --color-surface: var(--color-surface);
-  --color-gold: var(--color-gold);
-  --color-gold-dark: var(--color-gold-dark);
+  --color-sky: var(--color-sky);
+  --color-sky-soft: var(--color-sky-soft);
+  --color-brand: var(--color-brand);
+  --color-brand-dark: var(--color-brand-dark);
+  --color-deep: var(--color-deep);
   --color-moss: var(--color-moss);
   --color-slate: var(--color-slate);
 
-  --font-display: var(--font-space-grotesk);
+  --font-display: var(--font-barlow);
   --font-sans: var(--font-inter);
   --font-mono: var(--font-plex-mono);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-sans);
+}
+
+/* Sembunyikan scrollbar pada baris yang bisa digeser (carousel di HP). */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Animasi masuk (CSS murni, tanpa JS) — dipakai di area atas halaman
+   supaya muncul langsung tanpa menunggu hydration.
+   Hanya aktif jika pengguna TIDAK memilih "reduce motion".
+   `backwards` = gaya awal dipakai saat menunggu delay, lalu kembali
+   ke gaya normal elemen setelah selesai (tidak menimpa transform lain).
+   ------------------------------------------------------------------ */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+@keyframes line-up {
+  from {
+    transform: translateY(105%);
+  }
+}
+@keyframes photo-in {
+  from {
+    opacity: 0;
+    transform: scale(1.08);
+  }
+}
+@keyframes nav-in {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+}
+@keyframes page-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes float {
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .anim-rise {
+    animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+    animation-delay: var(--d, 0s);
+  }
+  .anim-line {
+    animation: line-up 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+    animation-delay: var(--d, 0s);
+  }
+  .anim-photo {
+    animation: photo-in 1.4s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+  }
+  .anim-nav {
+    animation: nav-in 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+  }
+  .anim-page {
+    animation: page-in 0.45s ease-out backwards;
+  }
+  .anim-float {
+    animation: float 6s ease-in-out infinite;
+  }
 }

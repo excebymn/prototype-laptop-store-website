@@ -8,16 +8,15 @@
 // biar tetap ringan dan tidak bergantung koneksi saat build/request.
 
 import { ImageResponse } from "next/og";
-import storeInfo from "@/lib/data/mock/store-info.json";
-import type { StoreInfo } from "@/lib/data";
-
-const info = storeInfo as StoreInfo;
+import { storeInfoRepository } from "@/lib/data";
 
 export const alt = "Excebymn — Laptop Bekas Berkualitas";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function Image() {
+  const info = await storeInfoRepository.get();
+
   return new ImageResponse(
     (
       <div
@@ -28,8 +27,8 @@ export default async function Image() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "80px",
-          backgroundColor: "#16233a",
-          color: "#f6f4ee",
+          backgroundColor: "#003049",
+          color: "#FBF2DF",
           fontFamily: "sans-serif",
         }}
       >
@@ -48,8 +47,8 @@ export default async function Image() {
               width: "56px",
               height: "56px",
               borderRadius: "12px",
-              border: "3px dashed #d1953a",
-              color: "#d1953a",
+              backgroundColor: "#C1121F",
+              color: "#FBF2DF",
               fontSize: "22px",
               fontWeight: 700,
             }}
@@ -67,7 +66,7 @@ export default async function Image() {
           style={{
             display: "flex",
             fontSize: "28px",
-            color: "#f6f4eecc",
+            color: "#FBF2DFcc",
             marginTop: "24px",
             maxWidth: "900px",
           }}

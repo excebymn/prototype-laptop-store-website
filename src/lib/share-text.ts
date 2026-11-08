@@ -10,7 +10,7 @@ export function buildLaptopShareText(laptop: Laptop, pageUrl: string): string {
   const { specs } = laptop;
 
   return [
-    `💻 *${laptop.name}*`,
+    `*${laptop.name}*`,
     `${laptop.brand} • ${CONDITION_LABEL[laptop.condition]}`,
     `*${formatPrice(laptop.price)}*`,
     "",

@@ -13,9 +13,7 @@ import {
   Weight,
   Wifi,
 } from "lucide-react";
-import { laptopRepository } from "@/lib/data";
-import type { StoreInfo } from "@/lib/data";
-import storeInfo from "@/lib/data/mock/store-info.json";
+import { laptopRepository, storeInfoRepository } from "@/lib/data";
 import { formatPrice } from "@/lib/format";
 import { CONDITION_LABEL, CONDITION_STYLE } from "@/lib/laptop-display";
 import { SITE_URL, INSTAGRAM_PROFILE_URL } from "@/lib/site";
@@ -23,8 +21,6 @@ import { LaptopGallery } from "@/components/laptop-gallery";
 import { AddToCompareButton } from "@/components/laptop-card/add-to-compare-button";
 import { ContactAdminButton } from "@/components/contact-admin-button";
 import { ProductShare } from "@/components/product-share";
-
-const info = storeInfo as StoreInfo;
 
 // Baris untuk tabel full specs — urutan & label ditentukan di sini, bukan
 // hardcode di JSX, supaya gampang ditambah/diubah.
@@ -103,6 +99,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
     notFound();
   }
 
+  const info = await storeInfoRepository.get();
   const specRows = buildSpecRows(laptop);
   const productJsonLd = buildProductJsonLd(laptop);
 
@@ -132,7 +129,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
               {laptop.name}
             </h1>
             <span
-              className={`mt-2 inline-block rounded-md border-2 border-dashed px-2 py-1 text-xs font-bold ${CONDITION_STYLE[laptop.condition]}`}
+              className={`mt-2 inline-block rounded-full px-3 py-1 text-xs font-semibold ${CONDITION_STYLE[laptop.condition]}`}
             >
               {CONDITION_LABEL[laptop.condition]}
             </span>
@@ -188,7 +185,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
             <ul className="text-slate mt-2 space-y-1.5 text-sm">
               {laptop.whatsIncluded.map((item) => (
                 <li key={item} className="flex items-center gap-2">
-                  <span className="bg-gold h-1.5 w-1.5 shrink-0 rounded-full" aria-hidden="true" />
+                  <span className="bg-brand h-1.5 w-1.5 shrink-0 rounded-full" aria-hidden="true" />
                   {item}
                 </li>
               ))}

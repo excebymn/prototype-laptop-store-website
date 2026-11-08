@@ -12,8 +12,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "Discovery & guidance laptop bekas berkualitas — bukan sekadar jual-beli.",
     start_url: "/",
     display: "standalone",
-    background_color: "#f6f4ee",
-    theme_color: "#16233a",
+    background_color: "#FBF2DF",
+    theme_color: "#003049",
     icons: [
       {
         src: "/favicon.ico",

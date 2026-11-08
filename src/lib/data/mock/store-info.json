@@ -4,14 +4,75 @@
   "whatsapp": "6281234567890",
   "phone": "+62 812-3456-7890",
   "email": "halo@excebymn.id",
-  "address": "Jl. Raya Darmo No. 45, Surabaya, Jawa Timur",
+  "address": "Jl. Kutai No.80, Darmo, Surabaya",
   "operatingHours": [
-    { "days": "Senin – Sabtu", "hours": "09.00 – 20.00 WIB" },
-    { "days": "Minggu", "hours": "10.00 – 17.00 WIB" }
+    {
+      "days": "Senin – Minggu",
+      "hours": "11.00 – 19.00 WIB"
+    }
   ],
   "socialMedia": {
     "instagram": "https://instagram.com/excebymn",
     "tiktok": "https://tiktok.com/@excebymn",
     "facebook": "https://facebook.com/excebymn"
-  }
+  },
+  "branches": [
+    {
+      "id": "sidoarjo-aryo",
+      "name": "Aryo Bebangah",
+      "city": "Sidoarjo",
+      "address": "Jl. Aryo Bebangah No.176, Sidoarjo",
+      "hours": "Senin – Minggu, 11.00 – 19.00"
+    },
+    {
+      "id": "surabaya-kutai",
+      "name": "Kutai",
+      "city": "Surabaya",
+      "address": "Jl. Kutai No.80, Darmo, Surabaya",
+      "hours": "Senin – Minggu, 11.00 – 19.00",
+      "isMain": true
+    },
+    {
+      "id": "sidoarjo-sudarso",
+      "name": "Yos Sudarso",
+      "city": "Sidoarjo",
+      "address": "Jl. Yos Sudarso No.47, Sidokumpul, Sidoarjo",
+      "hours": "Senin – Minggu, 11.00 – 19.00"
+    },
+    {
+      "id": "gresik-brotonegoro",
+      "name": "Brotonegoro Barat",
+      "city": "Gresik",
+      "address": "Jl. Brotonegoro Barat No.162, Gresik",
+      "hours": "Senin – Minggu, 11.00 – 19.00"
+    },
+    {
+      "id": "mojokerto-letkol",
+      "name": "Letkol Sumarjo",
+      "city": "Mojokerto",
+      "address": "Jl. Letkol Sumarjo No.8, Mojokerto",
+      "hours": "Senin – Minggu, 11.00 – 19.00"
+    },
+    {
+      "id": "malang-kedawung",
+      "name": "Kedawung",
+      "city": "Malang",
+      "address": "Jl. Kedawung No.2B, Malang",
+      "hours": "Senin – Minggu, 11.00 – 19.00"
+    },
+    {
+      "id": "kediri-semeru",
+      "name": "Semeru",
+      "city": "Kediri",
+      "address": "Jl. Semeru No.234, Kediri",
+      "hours": "Senin – Minggu, 11.00 – 19.00"
+    },
+    {
+      "id": "yogyakarta-padma",
+      "name": "Padma",
+      "city": "Yogyakarta",
+      "address": "Jl. Padma No.94D, Sariharjo, Kec. Sleman, Yogyakarta",
+      "hours": "Senin – Minggu, 11.00 – 19.00"
+    }
+  ]
 }

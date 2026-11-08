@@ -26,3 +26,34 @@ export function instagramMessageLink(profileUrl: string): string {
   const handle = profileUrl.replace(/\/+$/, "").split("/").pop() ?? "";
   return `https://ig.me/m/${handle}`;
 }
+
+// ---------------------------------------------------------------------------
+// Slot aset visual — isi saat asetnya sudah ada, tanpa ubah komponen.
+// Lihat public/images/README.md untuk ukuran & format yang disarankan.
+// ---------------------------------------------------------------------------
+
+/** Path logo, mis. "/images/logo.png" (taruh file di public/images/). `null` = pakai monogram sementara. */
+export const LOGO_SRC: string | null = null;
+
+/** Foto hero beranda, mis. "/images/hero.jpg". `null` = pakai ilustrasi laptop sementara. */
+export const HERO_IMAGE_SRC: string | null = null;
+
+/** Ubah ke `true` setelah foto produk (path di laptops.json `images`) benar-benar ada di public/. */
+export const PRODUCT_PHOTOS_READY = false;
+
+/** Teks garansi toko yang tampil di badge & strip keunggulan. */
+export const WARRANTY_TEXT = "Garansi Toko 1 Bulan";
+
+/**
+ * Link chat WhatsApp. NOTE: nomor di store-info.json masih placeholder —
+ * ganti dengan nomor asli sebelum situs dipublikasikan.
+ */
+export function whatsappLink(number: string, text?: string): string {
+  const base = `https://wa.me/${number}`;
+  return text ? `${base}?text=${encodeURIComponent(text)}` : base;
+}
+
+/** Link pencarian Google Maps untuk sebuah alamat. */
+export function mapsLink(address: string): string {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+}

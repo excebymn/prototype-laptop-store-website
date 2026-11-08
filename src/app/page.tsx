@@ -7,202 +7,170 @@ import {
   Coffee,
   Gamepad2,
   GraduationCap,
+  MapPin,
+  MessageCircle,
   Palette,
-  Scale,
-  Sparkles,
+  Search,
+  ShieldCheck,
 } from "lucide-react";
-import { laptopRepository } from "@/lib/data";
+import { laptopRepository, storeInfoRepository } from "@/lib/data";
 import type { Category } from "@/lib/data";
+import { HomeHero } from "@/components/home-hero";
 import { LaptopCard } from "@/components/laptop-card";
-import storeInfo from "@/lib/data/mock/store-info.json";
-import type { StoreInfo } from "@/lib/data";
-import { INSTAGRAM_PROFILE_URL, instagramMessageLink } from "@/lib/site";
+import { Reveal, RevealItem, RevealStagger } from "@/components/motion";
+import { ScrollRow } from "@/components/scroll-row";
+import { WARRANTY_TEXT, whatsappLink } from "@/lib/site";
 
-const info = storeInfo as StoreInfo;
+export async function generateMetadata(): Promise<Metadata> {
+  const info = await storeInfoRepository.get();
 
-export const metadata: Metadata = {
-  title: "Laptop Bekas Berkualitas, Dicek & Siap Pakai",
-  description: info.tagline,
-  alternates: { canonical: "/" },
-  openGraph: {
-    title: `${info.storeName} — Laptop Bekas Berkualitas`,
+  return {
+    title: "Laptop Bekas Berkualitas, Dicek & Siap Pakai",
     description: info.tagline,
-    url: "/",
-    type: "website",
-  },
-};
+    alternates: { canonical: "/" },
+    openGraph: {
+      title: `${info.storeName} — Laptop Bekas Berkualitas`,
+      description: info.tagline,
+      url: "/",
+      type: "website",
+    },
+  };
+}
 
-const NEED_CATEGORIES: { value: Category; label: string; icon: typeof Briefcase }[] = [
-  { value: "business", label: "Kerja Kantoran", icon: Briefcase },
-  { value: "gaming", label: "Gaming", icon: Gamepad2 },
-  { value: "programming", label: "Ngoding", icon: Code2 },
-  { value: "school", label: "Sekolah & Kuliah", icon: GraduationCap },
-  { value: "creative", label: "Desain & Kreatif", icon: Palette },
-  { value: "everyday", label: "Harian & Ringan", icon: Coffee },
+const NEED_CATEGORIES: {
+  value: Category;
+  label: string;
+  note: string;
+  icon: typeof Briefcase;
+}[] = [
+  { value: "business", label: "Kerja Kantoran", note: "Ringan, tahan lama, keyboard nyaman", icon: Briefcase },
+  { value: "gaming", label: "Gaming", note: "GPU dedicated & layar mulus", icon: Gamepad2 },
+  { value: "programming", label: "Ngoding", note: "RAM lega, SSD kencang", icon: Code2 },
+  { value: "school", label: "Sekolah & Kuliah", note: "Terjangkau & baterai awet", icon: GraduationCap },
+  { value: "creative", label: "Desain & Kreatif", note: "Layar akurat, tenaga besar", icon: Palette },
+  { value: "everyday", label: "Harian & Ringan", note: "Browsing, nonton, dokumen", icon: Coffee },
 ];
 
+// Judul section dibuat seragam supaya ritme halaman rapi.
+const SECTION_TITLE =
+  "font-display text-ink text-3xl font-bold tracking-wide uppercase sm:text-4xl";
+
 export default async function HomePage() {
-  const featuredLaptops = await laptopRepository.getFeatured();
-  const igDmLink = instagramMessageLink(info.socialMedia.instagram ?? INSTAGRAM_PROFILE_URL);
+  const [featuredLaptops, info] = await Promise.all([
+    laptopRepository.getFeatured(),
+    storeInfoRepository.get(),
+  ]);
+  const waLink = whatsappLink(info.whatsapp, `Halo ${info.storeName}, saya mau tanya stok laptop.`);
+
+  const valueProps = [
+    { icon: ShieldCheck, title: WARRANTY_TEXT, note: "Ada kendala di awal pemakaian? Kami bantu tangani." },
+    { icon: Search, title: "Cek Stok Ready", note: "Tanya stok terbaru lewat WhatsApp atau Instagram." },
+    { icon: MapPin, title: `${info.branches.length} Cabang`, note: "Datang langsung dan coba unitnya sebelum dibeli." },
+  ];
 
   return (
     <main className="flex flex-1 flex-col">
-      {/* Hero */}
-      <section className="mx-auto w-full max-w-6xl px-4 pt-16 pb-14 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-10 lg:grid-cols-2">
-          <div>
-            <span className="border-gold text-gold-dark inline-block -rotate-2 rounded-md border-2 border-dashed px-3 py-1 text-xs font-bold">
-              QC Tested ✓
-            </span>
-            <h1 className="font-display text-ink mt-4 text-4xl leading-tight font-semibold sm:text-5xl">
-              Laptop bekas yang dipilihkan, bukan cuma dijual.
-            </h1>
-            <p className="text-slate mt-4 text-base leading-relaxed sm:text-lg">
-              Excebymn bantu kamu nemuin laptop bekas berkualitas lewat Smart Finder — tinggal jawab
-              kebutuhanmu, kami cocokin unitnya. Semua sudah dicek dan siap pakai.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                href="/laptops"
-                className="bg-ink inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-              >
-                Explore Laptops
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
-              <Link
-                href="/finder"
-                className="bg-gold text-ink inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-transform hover:-rotate-1"
-              >
-                ✨ Smart Finder
-              </Link>
-            </div>
-          </div>
+      <HomeHero info={info} />
 
-          <div className="border-surface bg-surface/40 rounded-2xl border p-6">
-            <p className="text-slate text-xs font-medium tracking-wide uppercase">
-              Kondisi yang kami pakai
-            </p>
-            <ul className="mt-4 space-y-3 text-sm">
-              <li className="flex items-center justify-between">
-                <span className="text-ink font-medium">Like New</span>
-                <span className="text-slate">Nyaris tanpa tanda pemakaian</span>
-              </li>
-              <li className="flex items-center justify-between">
-                <span className="text-ink font-medium">QC Tested</span>
-                <span className="text-slate">Sudah lolos pengecekan menyeluruh</span>
-              </li>
-              <li className="flex items-center justify-between">
-                <span className="text-ink font-medium">Ready to Use</span>
-                <span className="text-slate">Siap pakai, harga paling bersahabat</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Laptops */}
-      <section className="border-surface border-t px-4 py-14 sm:px-6 lg:px-8">
+      {/* Laptop Pilihan: 3 kartu. Geser di HP, grid di layar ≥md. */}
+      <section className="px-4 pt-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
-          <div className="flex items-end justify-between gap-4">
+          <Reveal className="flex items-end justify-between gap-4">
             <div>
-              <h2 className="font-display text-ink text-2xl font-semibold">Laptop Pilihan</h2>
+              <h2 className={SECTION_TITLE}>Laptop Pilihan</h2>
               <p className="text-slate mt-1 text-sm">Unit terbaik yang lagi kami rekomendasikan</p>
             </div>
             <Link
               href="/laptops"
-              className="text-ink hidden items-center gap-1 text-sm font-medium sm:flex"
+              className="bg-ink inline-flex shrink-0 items-center rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
             >
-              Lihat semua
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              Lihat Semua
             </Link>
-          </div>
+          </Reveal>
 
-          <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {featuredLaptops.map((laptop) => (
-              <LaptopCard key={laptop.id} laptop={laptop} />
+          <RevealStagger className="no-scrollbar -mx-4 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-1 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0">
+            {featuredLaptops.slice(0, 3).map((laptop) => (
+              <RevealItem key={laptop.id} className="w-[80%] shrink-0 snap-start md:w-auto">
+                <LaptopCard laptop={laptop} />
+              </RevealItem>
             ))}
-          </div>
+          </RevealStagger>
         </div>
       </section>
 
-      {/* Smart Finder teaser — Browse by Need */}
-      <section className="border-surface bg-surface/40 border-t px-4 py-14 sm:px-6 lg:px-8">
+      {/* Cari sesuai kebutuhan */}
+      <section className="px-4 pt-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
-          <div className="text-center">
-            <h2 className="font-display text-ink text-2xl font-semibold">
-              Bingung Mulai dari Mana?
-            </h2>
-            <p className="text-slate mx-auto mt-1 max-w-xl text-sm">
-              Pilih kebutuhanmu, biar Smart Finder yang carikan laptop paling cocok.
-            </p>
-          </div>
-
-          <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-            {NEED_CATEGORIES.map(({ value, label, icon: Icon }) => (
+          <Reveal>
+          <ScrollRow
+            title="Cari Sesuai Kebutuhan"
+            subtitle="Pilih kebutuhanmu, Smart Finder yang carikan laptop paling cocok."
+          >
+            {NEED_CATEGORIES.map(({ value, label, note, icon: Icon }) => (
               <Link
                 key={value}
                 href={`/finder?purpose=${value}`}
-                className="border-surface bg-paper hover:border-gold flex flex-col items-center gap-2 rounded-xl border p-4 text-center transition-colors"
+                className="group bg-card border-surface hover:border-ink flex w-60 shrink-0 snap-start flex-col gap-4 rounded-3xl border p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-ink/10"
               >
-                <Icon className="text-ink h-6 w-6" aria-hidden="true" />
-                <span className="text-ink text-xs font-medium">{label}</span>
+                <span className="bg-sky-soft text-ink flex h-12 w-12 items-center justify-center rounded-2xl">
+                  <Icon className="h-6 w-6" aria-hidden="true" />
+                </span>
+                <div>
+                  <h3 className="font-display text-ink text-xl font-bold tracking-wide uppercase">
+                    {label}
+                  </h3>
+                  <p className="text-slate mt-1 text-xs leading-relaxed">{note}</p>
+                </div>
+                <span className="text-brand-dark mt-auto inline-flex items-center gap-1 text-xs font-semibold">
+                  Lihat laptop
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+                </span>
               </Link>
             ))}
-          </div>
+          </ScrollRow>
+          </Reveal>
         </div>
       </section>
 
-      {/* Compare teaser */}
-      <section className="border-surface border-t px-4 py-14 sm:px-6 lg:px-8">
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-5 text-center">
-          <span className="border-slate text-slate flex h-12 w-12 items-center justify-center rounded-full border-2 border-dashed">
-            <Scale className="h-5 w-5" aria-hidden="true" />
-          </span>
-          <h2 className="font-display text-ink text-2xl font-semibold">
-            Masih Ragu Antara Dua Pilihan?
+      {/* Keunggulan + ajakan — satu panel merah tua */}
+      <section className="px-4 py-20 sm:px-6 lg:px-8">
+        <Reveal className="bg-deep mx-auto max-w-6xl rounded-[2rem] px-6 py-12 sm:px-10">
+          <h2 className="font-display text-paper text-center text-3xl font-bold tracking-wide uppercase sm:text-4xl">
+            Beli Tenang di {info.storeName}
           </h2>
-          <p className="text-slate max-w-xl text-sm">
-            Bandingkan spesifikasi dan harga sampai 2 laptop sekaligus, biar keputusannya lebih
-            mantap.
-          </p>
-          <Link
-            href="/compare"
-            className="border-ink text-ink hover:bg-ink inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-semibold transition-colors hover:text-white"
-          >
-            Coba Compare
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
-        </div>
-      </section>
 
-      {/* CTA akhir */}
-      <section className="bg-ink px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-5 text-center">
-          <Sparkles className="text-gold h-6 w-6" aria-hidden="true" />
-          <h2 className="font-display text-2xl font-semibold text-white">
-            Siap Nemuin Laptop yang Pas?
-          </h2>
-          <p className="max-w-xl text-sm text-white/70">
-            Jelajahi katalog lengkap kami, atau langsung ngobrol sama admin kalau butuh rekomendasi
-            personal.
-          </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link
-              href="/laptops"
-              className="bg-gold text-ink rounded-full px-5 py-3 text-sm font-semibold transition-opacity hover:opacity-90"
-            >
-              Explore Laptops
-            </Link>
+          <RevealStagger as="ul" className="mt-10 grid gap-8 sm:grid-cols-3" stagger={0.15}>
+            {valueProps.map(({ icon: Icon, title, note }) => (
+              <RevealItem as="li" key={title} className="flex flex-col items-center gap-2 text-center">
+                <span className="bg-paper/10 text-paper flex h-12 w-12 items-center justify-center rounded-full">
+                  <Icon className="h-6 w-6" aria-hidden="true" />
+                </span>
+                <h3 className="font-display text-paper text-xl font-bold tracking-wide uppercase">
+                  {title}
+                </h3>
+                <p className="text-paper/75 max-w-xs text-sm">{note}</p>
+              </RevealItem>
+            ))}
+          </RevealStagger>
+
+          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a
-              href={igDmLink}
+              href={waLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full border border-white/30 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+              className="bg-paper text-ink flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition-opacity hover:opacity-90"
             >
-              Contact Admin
+              <MessageCircle className="h-4 w-4" aria-hidden="true" />
+              Tanya via WhatsApp
             </a>
+            <Link
+              href="/locations"
+              className="border-paper/50 text-paper hover:bg-paper hover:text-ink flex items-center justify-center gap-2 rounded-full border px-6 py-3.5 text-sm font-semibold transition-colors"
+            >
+              Lihat {info.branches.length} Cabang
+            </Link>
           </div>
-        </div>
+        </Reveal>
       </section>
     </main>
   );

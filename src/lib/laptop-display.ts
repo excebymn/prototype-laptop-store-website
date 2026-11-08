@@ -11,7 +11,7 @@ export const CONDITION_LABEL: Record<Condition, string> = {
 };
 
 export const CONDITION_STYLE: Record<Condition, string> = {
-  "like-new": "border-gold text-gold-dark",
-  "qc-tested": "border-moss text-moss",
-  "ready-to-use": "border-slate text-slate",
+  "like-new": "bg-brand/10 text-brand-dark",
+  "qc-tested": "bg-sky-soft text-ink",
+  "ready-to-use": "bg-surface text-slate",
 };

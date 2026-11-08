@@ -30,24 +30,21 @@ export default async function Image({ params }: OgImageProps) {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "80px",
-          backgroundColor: "#16233a",
-          color: "#f6f4ee",
+          backgroundColor: "#003049",
+          color: "#FBF2DF",
           fontFamily: "sans-serif",
         }}
       >
         {laptop ? (
           <>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-              <div style={{ display: "flex", fontSize: "26px", color: "#f6f4eeaa" }}>
+              <div style={{ display: "flex", fontSize: "26px", color: "#FBF2DFaa" }}>
                 {laptop.brand}
               </div>
               <div
                 style={{
                   display: "flex",
-                  padding: "10px 20px",
-                  borderRadius: "10px",
-                  border: "3px dashed #d1953a",
-                  color: "#d1953a",
+                  color: "#FF8A8F",
                   fontSize: "24px",
                   fontWeight: 700,
                 }}
@@ -60,10 +57,10 @@ export default async function Image({ params }: OgImageProps) {
               <div style={{ display: "flex", fontSize: "56px", fontWeight: 700, maxWidth: "1000px" }}>
                 {laptop.name}
               </div>
-              <div style={{ display: "flex", fontSize: "44px", fontWeight: 700, color: "#d1953a" }}>
+              <div style={{ display: "flex", fontSize: "44px", fontWeight: 700, color: "#C1121F" }}>
                 {formatPrice(laptop.price)}
               </div>
-              <div style={{ display: "flex", fontSize: "26px", color: "#f6f4eecc" }}>
+              <div style={{ display: "flex", fontSize: "26px", color: "#FBF2DFcc" }}>
                 {laptop.specs.cpu} • {laptop.specs.ramGb}GB RAM •{" "}
                 {laptop.specs.storageGb}GB {laptop.specs.storageType}
               </div>

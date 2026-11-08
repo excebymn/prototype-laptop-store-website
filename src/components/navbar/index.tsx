@@ -3,113 +3,168 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
+import { Logo } from "@/components/logo";
 
-const NAV_LINKS = [
+const PRIMARY_LINKS = [
   { href: "/", label: "Home" },
   { href: "/laptops", label: "Laptops" },
   { href: "/finder", label: "Finder" },
   { href: "/compare", label: "Compare" },
   { href: "/guide", label: "Guide" },
+  { href: "/locations", label: "Lokasi" },
+];
+
+// Tampil di menu HP saja (di desktop sudah ada di footer).
+const SECONDARY_LINKS = [
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
 
-function StampMark() {
-  return (
-    <span
-      aria-hidden="true"
-      className="border-gold text-gold flex h-7 w-7 -rotate-6 items-center justify-center rounded-md border-2 border-dashed text-[10px] font-bold"
-    >
-      EX
-    </span>
-  );
-}
+const EASE: [number, number, number, number] = [0.2, 0.7, 0.2, 1];
 
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export function Navbar() {
+export function Navbar({ storeName }: { storeName: string }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
   const pathname = usePathname();
+  const { scrollY } = useScroll();
+  const close = () => setIsMenuOpen(false);
+
+  // Sembunyi saat scroll ke bawah, muncul lagi saat scroll ke atas.
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious() ?? 0;
+    if (latest > previous && latest > 160 && !isMenuOpen) setIsHidden(true);
+    else if (latest < previous) setIsHidden(false);
+  });
 
   return (
-    <header className="border-surface bg-paper/95 sticky top-0 z-50 border-b backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
-          <StampMark />
-          <span className="font-display text-ink text-lg font-semibold tracking-tight">
-            Excebymn
-          </span>
-        </Link>
-
-        <nav className="hidden items-center gap-6 md:flex" aria-label="Navigasi utama">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`text-sm font-medium transition-colors ${
-                isActive(pathname, link.href) ? "text-ink" : "text-slate hover:text-ink"
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="hidden md:block">
-          <Link
-            href="/finder"
-            className="bg-gold text-ink hover:bg-gold-dark inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold transition-transform hover:-rotate-1 hover:text-white"
-          >
-            ✨ Cari Laptop Saya
+    <motion.header
+      className="anim-nav sticky top-0 z-50 px-3 pt-3 sm:px-6"
+      animate={{ y: isHidden ? -120 : 0 }}
+      transition={{ duration: 0.4, ease: EASE }}
+    >
+      <div className="mx-auto max-w-6xl">
+        <div className="border-surface bg-card/90 flex h-14 items-center justify-between rounded-full border pr-2 pl-4 shadow-sm backdrop-blur sm:pl-5">
+          <Link href="/" onClick={close} aria-label={`${storeName} — beranda`}>
+            <Logo name={storeName} />
           </Link>
-        </div>
 
-        <button
-          type="button"
-          className="text-ink -mr-2 flex h-10 w-10 items-center justify-center md:hidden"
-          aria-label={isMenuOpen ? "Tutup menu" : "Buka menu"}
-          aria-expanded={isMenuOpen}
-          onClick={() => setIsMenuOpen((open) => !open)}
-        >
-          {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
-      </div>
-
-      {isMenuOpen && (
-        <nav
-          className="border-surface bg-paper border-t px-4 py-4 md:hidden"
-          aria-label="Navigasi mobile"
-        >
-          <ul className="flex flex-col gap-1">
-            {NAV_LINKS.map((link) => (
-              <li key={link.href}>
+          <nav className="hidden items-center gap-1 lg:flex" aria-label="Navigasi utama">
+            {PRIMARY_LINKS.map((link) => {
+              const active = isActive(pathname, link.href);
+              return (
                 <Link
+                  key={link.href}
                   href={link.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`block rounded-md px-3 py-2 text-sm font-medium ${
-                    isActive(pathname, link.href)
-                      ? "bg-surface text-ink"
-                      : "text-slate hover:bg-surface hover:text-ink"
+                  aria-current={active ? "page" : undefined}
+                  className={`relative rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${
+                    active ? "text-white" : "text-slate hover:text-ink"
                   }`}
                 >
-                  {link.label}
+                  {active && (
+                    <motion.span
+                      layoutId="nav-pill"
+                      className="bg-ink absolute inset-0 rounded-full"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
+                    />
+                  )}
+                  <span className="relative z-10">{link.label}</span>
                 </Link>
-              </li>
-            ))}
-          </ul>
-          <Link
-            href="/finder"
-            onClick={() => setIsMenuOpen(false)}
-            className="bg-gold text-ink mt-3 flex items-center justify-center rounded-full px-4 py-2.5 text-sm font-semibold"
-          >
-            ✨ Cari Laptop Saya
-          </Link>
-        </nav>
-      )}
-    </header>
+              );
+            })}
+          </nav>
+
+          <div className="flex items-center gap-1">
+            <Link
+              href="/finder"
+              className="group bg-ink hidden items-center gap-2 rounded-full py-1.5 pr-1.5 pl-4 text-sm font-semibold text-white transition-all hover:shadow-lg active:scale-95 sm:inline-flex"
+            >
+              Cari Laptop Saya
+              <span className="bg-brand flex h-8 w-8 items-center justify-center rounded-full">
+                <ArrowUpRight
+                  className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45"
+                  aria-hidden="true"
+                />
+              </span>
+            </Link>
+
+            <button
+              type="button"
+              className="text-ink flex h-10 w-10 items-center justify-center rounded-full lg:hidden"
+              aria-label={isMenuOpen ? "Tutup menu" : "Buka menu"}
+              aria-expanded={isMenuOpen}
+              onClick={() => setIsMenuOpen((open) => !open)}
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={isMenuOpen ? "close" : "open"}
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.15 }}
+                  className="flex"
+                >
+                  {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                </motion.span>
+              </AnimatePresence>
+            </button>
+          </div>
+        </div>
+
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.nav
+              key="mobile-menu"
+              className="border-surface bg-card mt-2 origin-top rounded-3xl border p-3 shadow-lg lg:hidden"
+              aria-label="Navigasi mobile"
+              initial={{ opacity: 0, y: -12, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -12, scale: 0.97 }}
+              transition={{ duration: 0.25, ease: EASE }}
+            >
+              <motion.ul
+                className="grid grid-cols-2 gap-1"
+                initial="hidden"
+                animate="show"
+                variants={{ show: { transition: { staggerChildren: 0.04, delayChildren: 0.06 } } }}
+              >
+                {[...PRIMARY_LINKS, ...SECONDARY_LINKS].map((link) => (
+                  <motion.li
+                    key={link.href}
+                    variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}
+                  >
+                    <Link
+                      href={link.href}
+                      onClick={close}
+                      className={`block rounded-2xl px-4 py-3 text-sm font-semibold ${
+                        isActive(pathname, link.href)
+                          ? "bg-ink text-white"
+                          : "text-ink hover:bg-surface"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.li>
+                ))}
+              </motion.ul>
+              <Link
+                href="/finder"
+                onClick={close}
+                className="bg-brand mt-2 flex items-center justify-center gap-2 rounded-full px-4 py-3 text-sm font-semibold text-white"
+              >
+                Cari Laptop Saya
+                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            </motion.nav>
+          )}
+        </AnimatePresence>
+      </div>
+    </motion.header>
   );
 }

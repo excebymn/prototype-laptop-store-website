@@ -28,8 +28,8 @@ export default async function Image({ params }: OgImageProps) {
           flexDirection: "column",
           justifyContent: "center",
           padding: "80px",
-          backgroundColor: "#f6f4ee",
-          color: "#16233a",
+          backgroundColor: "#FBF2DF",
+          color: "#003049",
           fontFamily: "sans-serif",
         }}
       >
@@ -39,10 +39,7 @@ export default async function Image({ params }: OgImageProps) {
               style={{
                 display: "flex",
                 alignSelf: "flex-start",
-                padding: "10px 20px",
-                borderRadius: "10px",
-                border: "3px dashed #d1953a",
-                color: "#a9722a",
+                color: "#FF8A8F",
                 fontSize: "24px",
                 fontWeight: 700,
               }}
@@ -52,7 +49,7 @@ export default async function Image({ params }: OgImageProps) {
             <div style={{ display: "flex", fontSize: "52px", fontWeight: 700, marginTop: "40px", maxWidth: "1000px" }}>
               {guide.title}
             </div>
-            <div style={{ display: "flex", fontSize: "26px", color: "#5b6472", marginTop: "24px", maxWidth: "900px" }}>
+            <div style={{ display: "flex", fontSize: "26px", color: "#46606F", marginTop: "24px", maxWidth: "900px" }}>
               {guide.excerpt}
             </div>
           </>

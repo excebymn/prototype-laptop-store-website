@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { SlidersHorizontal, X } from "lucide-react";
+import { useStore } from "@/store";
 import {
-  AVAILABLE_BRANDS,
   CATEGORY_OPTIONS,
   RAM_OPTIONS,
   STORAGE_OPTIONS,
@@ -18,6 +18,7 @@ interface LaptopFiltersProps {
 }
 
 function FilterFields({ filters, onChange }: Omit<LaptopFiltersProps, "onReset">) {
+  const brands = useStore((s) => s.brands);
   const [priceMin, setPriceMin] = useState(filters.priceMin?.toString() ?? "");
   const [priceMax, setPriceMax] = useState(filters.priceMax?.toString() ?? "");
 
@@ -40,7 +41,7 @@ function FilterFields({ filters, onChange }: Omit<LaptopFiltersProps, "onReset">
       <div>
         <h3 className="text-ink text-sm font-semibold">Brand</h3>
         <div className="mt-2 flex flex-col gap-1.5">
-          {AVAILABLE_BRANDS.map((brand) => (
+          {brands.map((brand) => (
             <label key={brand} className="text-slate flex items-center gap-2 text-sm">
               <input
                 type="checkbox"

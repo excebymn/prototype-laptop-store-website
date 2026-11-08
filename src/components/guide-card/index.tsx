@@ -11,9 +11,9 @@ export function GuideCard({ guide }: GuideCardProps) {
   return (
     <Link
       href={`/guide/${guide.slug}`}
-      className="border-surface bg-paper hover:border-gold flex flex-col gap-3 rounded-xl border p-5 transition-colors"
+      className="border-surface bg-paper hover:border-brand flex flex-col gap-3 rounded-xl border p-5 transition-colors"
     >
-      <BookOpen className="text-gold h-5 w-5" aria-hidden="true" />
+      <BookOpen className="text-brand h-5 w-5" aria-hidden="true" />
       <h3 className="font-display text-ink text-base font-semibold">{guide.title}</h3>
       <p className="text-slate line-clamp-2 text-sm leading-relaxed">{guide.excerpt}</p>
       <div className="text-slate mt-auto flex items-center justify-between pt-1 text-xs">

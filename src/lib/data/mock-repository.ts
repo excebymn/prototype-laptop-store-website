@@ -4,13 +4,15 @@
 // backend is ready, replace this file with e.g. `supabase-repository.ts`
 // implementing the same interfaces — store and components stay untouched.
 
-import type { GuideRepository, LaptopRepository } from "./repository";
-import type { GuideArticle, Laptop, LaptopFilters } from "./types";
+import type { GuideRepository, LaptopRepository, StoreInfoRepository } from "./repository";
+import type { GuideArticle, Laptop, LaptopFilters, StoreInfo } from "./types";
 import laptopsData from "./mock/laptops.json";
 import guidesData from "./mock/guides.json";
+import storeInfoData from "./mock/store-info.json";
 
 const laptops = laptopsData as Laptop[];
 const guides = guidesData as GuideArticle[];
+const storeInfo = storeInfoData as StoreInfo;
 
 function matchesFilters(laptop: Laptop, filters?: LaptopFilters): boolean {
   if (!filters) return true;
@@ -85,6 +87,14 @@ export class MockLaptopRepository implements LaptopRepository {
   async getFeatured(): Promise<Laptop[]> {
     return laptops.filter((laptop) => laptop.isFeatured);
   }
+
+  async getByIds(ids: string[]): Promise<Laptop[]> {
+    return laptops.filter((laptop) => ids.includes(laptop.id));
+  }
+
+  async getBrands(): Promise<string[]> {
+    return [...new Set(laptops.map((laptop) => laptop.brand))].sort();
+  }
 }
 
 export class MockGuideRepository implements GuideRepository {
@@ -96,5 +106,11 @@ export class MockGuideRepository implements GuideRepository {
 
   async getBySlug(slug: string): Promise<GuideArticle | null> {
     return guides.find((guide) => guide.slug === slug) ?? null;
+  }
+}
+
+export class MockStoreInfoRepository implements StoreInfoRepository {
+  async get(): Promise<StoreInfo> {
+    return storeInfo;
   }
 }

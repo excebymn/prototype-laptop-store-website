@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { Mail, MapPin } from "lucide-react";
 import { InstagramIcon } from "@/components/icons/instagram-icon";
-import storeInfo from "@/lib/data/mock/store-info.json";
-import type { StoreInfo } from "@/lib/data";
+import { storeInfoRepository } from "@/lib/data";
 import { INSTAGRAM_PROFILE_URL, instagramMessageLink } from "@/lib/site";
 
-const info = storeInfo as StoreInfo;
+export async function generateMetadata(): Promise<Metadata> {
+  const info = await storeInfoRepository.get();
 
-export const metadata: Metadata = {
+  return {
   title: "Hubungi Kami",
   description: `Chat via Instagram atau email — ${info.storeName} siap bantu jawab pertanyaanmu.`,
   alternates: { canonical: "/contact" },
@@ -18,8 +18,10 @@ export const metadata: Metadata = {
     type: "website",
   },
 };
+}
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const info = await storeInfoRepository.get();
   const igDmLink = instagramMessageLink(info.socialMedia.instagram ?? INSTAGRAM_PROFILE_URL);
   const mapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(info.address)}`;
 
@@ -35,7 +37,7 @@ export default function ContactPage() {
           href={igDmLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="border-gold bg-gold/5 hover:bg-gold/10 flex flex-col gap-3 rounded-xl border-2 border-dashed p-6 transition-colors sm:col-span-2"
+          className="border-brand bg-brand/5 hover:bg-brand/10 flex flex-col gap-3 rounded-xl border p-6 transition-colors sm:col-span-2"
         >
           <span className="bg-ink flex h-11 w-11 items-center justify-center rounded-full text-white">
             <InstagramIcon className="h-5 w-5" aria-hidden="true" />
@@ -50,7 +52,7 @@ export default function ContactPage() {
 
         <a
           href={`mailto:${info.email}`}
-          className="border-surface hover:border-gold flex items-start gap-3 rounded-xl border p-5 transition-colors sm:col-span-2"
+          className="border-surface hover:border-brand flex items-start gap-3 rounded-xl border p-5 transition-colors sm:col-span-2"
         >
           <Mail className="text-ink mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
           <div>
@@ -63,7 +65,7 @@ export default function ContactPage() {
           href={mapsLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="border-surface hover:border-gold flex items-start gap-3 rounded-xl border p-5 transition-colors sm:col-span-2"
+          className="border-surface hover:border-brand flex items-start gap-3 rounded-xl border p-5 transition-colors sm:col-span-2"
         >
           <MapPin className="text-ink mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
           <div>
@@ -91,7 +93,7 @@ export default function ContactPage() {
                 href={info.socialMedia.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border-surface text-slate hover:border-gold hover:text-gold-dark rounded-full border px-4 py-2 text-xs font-medium transition-colors"
+                className="border-surface text-slate hover:border-brand hover:text-brand-dark rounded-full border px-4 py-2 text-xs font-medium transition-colors"
               >
                 Instagram
               </a>
@@ -101,7 +103,7 @@ export default function ContactPage() {
                 href={info.socialMedia.tiktok}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border-surface text-slate hover:border-gold hover:text-gold-dark rounded-full border px-4 py-2 text-xs font-medium transition-colors"
+                className="border-surface text-slate hover:border-brand hover:text-brand-dark rounded-full border px-4 py-2 text-xs font-medium transition-colors"
               >
                 TikTok
               </a>
@@ -111,7 +113,7 @@ export default function ContactPage() {
                 href={info.socialMedia.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border-surface text-slate hover:border-gold hover:text-gold-dark rounded-full border px-4 py-2 text-xs font-medium transition-colors"
+                className="border-surface text-slate hover:border-brand hover:text-brand-dark rounded-full border px-4 py-2 text-xs font-medium transition-colors"
               >
                 Facebook
               </a>

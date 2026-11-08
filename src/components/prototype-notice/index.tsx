@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { InstagramIcon } from "@/components/icons/instagram-icon";
-import storeInfo from "@/lib/data/mock/store-info.json";
 import type { StoreInfo } from "@/lib/data";
 import { SHOW_PROTOTYPE_NOTICE, INSTAGRAM_PROFILE_URL, instagramMessageLink } from "@/lib/site";
 
@@ -24,9 +23,7 @@ import { SHOW_PROTOTYPE_NOTICE, INSTAGRAM_PROFILE_URL, instagramMessageLink } fr
 
 const SHOW_DELAY_MS = 1200;
 
-const info = storeInfo as StoreInfo;
-
-export function PrototypeNotice() {
+export function PrototypeNotice({ info }: { info: StoreInfo }) {
   const [isOpen, setIsOpen] = useState(false);
 
   // Tampilkan setelah delay kecil (biar tidak "menyerbu" begitu halaman
@@ -71,7 +68,7 @@ export function PrototypeNotice() {
       onClick={dismiss}
     >
       <div
-        className="border-surface bg-paper relative w-full max-w-md rounded-2xl border-2 p-6 shadow-xl sm:p-7"
+        className="border-surface bg-paper relative w-full max-w-md rounded-2xl border p-6 shadow-xl sm:p-7"
         onClick={(event) => event.stopPropagation()}
       >
         <button
@@ -83,11 +80,7 @@ export function PrototypeNotice() {
           <X className="h-5 w-5" aria-hidden="true" />
         </button>
 
-        <span className="border-gold text-gold inline-flex -rotate-2 items-center rounded-md border-2 border-dashed px-2 py-1 text-[11px] font-bold tracking-wide uppercase">
-          Prototype
-        </span>
-
-        <h2 id="prototype-notice-title" className="font-display text-ink mt-3 text-xl font-semibold">
+        <h2 id="prototype-notice-title" className="font-display text-ink text-xl font-semibold">
           Ini masih prototype
         </h2>
 

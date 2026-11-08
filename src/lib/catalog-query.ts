@@ -2,7 +2,8 @@
 // Dipisah dari app/laptops/page.tsx (yang "use client") supaya fungsi murni
 // ini gampang diuji dan dipakai ulang tanpa ikut boundary client component.
 
-import type { Category, LaptopFilters } from "@/lib/data";
+import type { LaptopFilters } from "@/lib/data";
+import { isCategory, isSortValue } from "@/lib/catalog-options";
 
 export function parseCatalogSearchParams(params: URLSearchParams): {
   filters: LaptopFilters;
@@ -14,24 +15,27 @@ export function parseCatalogSearchParams(params: URLSearchParams): {
   if (brand) filters.brand = brand.split(",");
 
   const category = params.get("category");
-  if (category) filters.category = category.split(",") as Category[];
+  if (category) {
+    const valid = category.split(",").filter(isCategory);
+    if (valid.length > 0) filters.category = valid;
+  }
 
   const priceMin = params.get("priceMin");
-  if (priceMin) filters.priceMin = Number(priceMin);
+  if (priceMin && Number.isFinite(Number(priceMin))) filters.priceMin = Number(priceMin);
 
   const priceMax = params.get("priceMax");
-  if (priceMax) filters.priceMax = Number(priceMax);
+  if (priceMax && Number.isFinite(Number(priceMax))) filters.priceMax = Number(priceMax);
 
   const ramMin = params.get("ramMin");
-  if (ramMin) filters.ramMin = Number(ramMin);
+  if (ramMin && Number.isFinite(Number(ramMin))) filters.ramMin = Number(ramMin);
 
   const storageMin = params.get("storageMin");
-  if (storageMin) filters.storageMin = Number(storageMin);
+  if (storageMin && Number.isFinite(Number(storageMin))) filters.storageMin = Number(storageMin);
 
   if (params.get("available") === "1") filters.availableOnly = true;
 
   const sort = params.get("sort");
-  if (sort) filters.sortBy = sort as LaptopFilters["sortBy"];
+  if (isSortValue(sort)) filters.sortBy = sort;
 
   const page = Number(params.get("page") ?? "1") || 1;
 

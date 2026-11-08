@@ -80,12 +80,24 @@ export interface FinderResult {
   reasons: string[];
 }
 
-// Data toko — statis, dibaca langsung dari mock/store-info.json tanpa lewat
-// repository (lihat Perencanaan §5.8: About & Contact belum butuh repository).
+// Data toko — dibaca lewat `storeInfoRepository` (satu baris/dokumen di
+// database nanti), bukan import JSON langsung.
 
 export interface StoreOperatingHours {
   days: string;
   hours: string;
+}
+
+export interface StoreBranch {
+  id: string;
+  /** Nama singkat area/jalan, mis. "Kutai". */
+  name: string;
+  city: string;
+  address: string;
+  /** Jam kerja dalam satu teks, mis. "Senin – Minggu, 11.00 – 19.00". */
+  hours: string;
+  /** Cabang pusat/utama — ditampilkan lebih menonjol. */
+  isMain?: boolean;
 }
 
 export interface StoreInfo {
@@ -96,6 +108,7 @@ export interface StoreInfo {
   email: string;
   address: string;
   operatingHours: StoreOperatingHours[];
+  branches: StoreBranch[];
   socialMedia: {
     instagram?: string;
     tiktok?: string;

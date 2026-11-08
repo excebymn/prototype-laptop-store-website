@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import { X } from "lucide-react";
-import { useCompareStore } from "@/store/useCompareStore";
+import { useStore } from "@/store";
 import { formatPrice } from "@/lib/format";
 import { CONDITION_LABEL } from "@/lib/laptop-display";
 import { CATEGORY_OPTIONS } from "@/lib/catalog-options";
-import type { CompareSlots } from "@/store/useCompareStore";
+import type { CompareSlots } from "@/store";
 import type { Laptop } from "@/lib/data";
 
 function categoryLabels(laptop: Laptop): string {
@@ -39,7 +39,7 @@ interface CompareTableProps {
 }
 
 export function CompareTable({ slots }: CompareTableProps) {
-  const removeFromCompare = useCompareStore((state) => state.removeFromCompare);
+  const removeFromCompare = useStore((state) => state.removeFromCompare);
   const [a, b] = slots;
 
   return (
@@ -68,7 +68,7 @@ export function CompareTable({ slots }: CompareTableProps) {
                     </div>
                     <Link
                       href={`/laptops/${laptop.slug}`}
-                      className="text-gold-dark text-xs font-medium hover:underline"
+                      className="text-brand-dark text-xs font-medium hover:underline"
                     >
                       Lihat Detail
                     </Link>
@@ -78,7 +78,7 @@ export function CompareTable({ slots }: CompareTableProps) {
                     <span>Belum dipilih</span>
                     <Link
                       href="/laptops"
-                      className="text-gold-dark text-xs font-medium hover:underline"
+                      className="text-brand-dark text-xs font-medium hover:underline"
                     >
                       Pilih dari Katalog
                     </Link>
@@ -95,7 +95,7 @@ export function CompareTable({ slots }: CompareTableProps) {
             const isDifferent = valueA !== null && valueB !== null && valueA !== valueB;
 
             return (
-              <tr key={row.label} className={isDifferent ? "bg-gold/10" : undefined}>
+              <tr key={row.label} className={isDifferent ? "bg-brand/10" : undefined}>
                 <th
                   scope="row"
                   className="border-surface text-slate border-b p-3 text-left text-xs font-medium"
