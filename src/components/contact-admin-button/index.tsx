@@ -40,7 +40,7 @@ export function ContactAdminButton({ instagramUrl, laptop, className }: ContactA
       onClick={handleClick}
       className={
         className ??
-        "bg-ink inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+        "bg-ink inline-flex items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
       }
     >
       <InstagramIcon className="h-4 w-4" aria-hidden="true" />

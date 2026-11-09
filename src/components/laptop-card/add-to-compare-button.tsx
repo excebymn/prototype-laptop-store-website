@@ -24,7 +24,7 @@ export function AddToCompareButton({ laptop, variant = "icon" }: AddToCompareBut
         type="button"
         onClick={handleClick}
         aria-pressed={isInCompare}
-        className={`inline-flex items-center justify-center gap-2 rounded-full border px-5 py-3 text-sm font-semibold transition-colors ${
+        className={`inline-flex items-center justify-center gap-2 rounded-md border px-5 py-3 text-sm font-semibold transition-colors ${
           isInCompare
             ? "border-brand bg-brand/10 text-brand-dark"
             : "border-ink text-ink hover:bg-ink hover:text-white"
@@ -42,7 +42,7 @@ export function AddToCompareButton({ laptop, variant = "icon" }: AddToCompareBut
       onClick={handleClick}
       aria-pressed={isInCompare}
       aria-label={label}
-      className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full border transition-colors ${
+      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-md border transition-colors ${
         isInCompare
           ? "border-brand bg-brand/10 text-brand-dark"
           : "border-surface text-slate hover:border-ink hover:text-ink"

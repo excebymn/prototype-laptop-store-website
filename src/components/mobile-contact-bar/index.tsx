@@ -17,14 +17,14 @@ export function MobileContactBar({ info }: { info: StoreInfo }) {
           href={wa}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-1 items-center justify-center gap-2 rounded-full bg-[#128c4a] px-4 py-3 text-sm font-semibold text-white"
+          className="flex flex-1 items-center justify-center gap-2 rounded-md bg-[#128c4a] px-4 py-3 text-sm font-semibold text-white"
         >
           <MessageCircle className="h-4 w-4" aria-hidden="true" />
           Tanya Stok
         </a>
         <Link
           href="/locations"
-          className="border-ink text-ink flex items-center justify-center gap-2 rounded-full border px-5 py-3 text-sm font-semibold"
+          className="border-ink text-ink flex items-center justify-center gap-2 rounded-md border px-5 py-3 text-sm font-semibold"
         >
           <MapPin className="h-4 w-4" aria-hidden="true" />
           Lokasi

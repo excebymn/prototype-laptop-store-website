@@ -3,6 +3,7 @@ import { Mail, MapPin } from "lucide-react";
 import { InstagramIcon } from "@/components/icons/instagram-icon";
 import type { StoreInfo } from "@/lib/data";
 import { Logo } from "@/components/logo";
+import { Reveal } from "@/components/motion";
 import { INSTAGRAM_PROFILE_URL, instagramMessageLink } from "@/lib/site";
 
 const NAV_LINKS = [
@@ -20,7 +21,7 @@ export function Footer({ info }: { info: StoreInfo }) {
 
   return (
     <footer className="bg-ink text-paper/80">
-      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+      <Reveal className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8" y={20}>
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <Logo name={info.storeName} tone="light" />
@@ -89,7 +90,7 @@ export function Footer({ info }: { info: StoreInfo }) {
                   href={info.socialMedia.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border-paper/20 hover:border-sky hover:text-sky rounded-full border px-3 py-1 text-xs transition-colors"
+                  className="border-paper/20 hover:border-sky hover:text-sky rounded-md border px-3 py-1 text-xs transition-colors"
                 >
                   Instagram
                 </a>
@@ -99,7 +100,7 @@ export function Footer({ info }: { info: StoreInfo }) {
                   href={info.socialMedia.tiktok}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border-paper/20 hover:border-sky hover:text-sky rounded-full border px-3 py-1 text-xs transition-colors"
+                  className="border-paper/20 hover:border-sky hover:text-sky rounded-md border px-3 py-1 text-xs transition-colors"
                 >
                   TikTok
                 </a>
@@ -109,7 +110,7 @@ export function Footer({ info }: { info: StoreInfo }) {
                   href={info.socialMedia.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border-paper/20 hover:border-sky hover:text-sky rounded-full border px-3 py-1 text-xs transition-colors"
+                  className="border-paper/20 hover:border-sky hover:text-sky rounded-md border px-3 py-1 text-xs transition-colors"
                 >
                   Facebook
                 </a>
@@ -121,7 +122,7 @@ export function Footer({ info }: { info: StoreInfo }) {
         <div className="border-paper/10 text-paper/50 mt-10 border-t pt-6 text-xs">
           © {new Date().getFullYear()} {info.storeName}. Semua hak cipta dilindungi.
         </div>
-      </div>
+      </Reveal>
     </footer>
   );
 }

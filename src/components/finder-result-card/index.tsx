@@ -14,7 +14,7 @@ export function FinderResultCard({ result, rank }: FinderResultCardProps) {
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between">
         <span className="text-slate text-xs font-medium">Rekomendasi #{rank}</span>
-        <span className="bg-brand/10 text-brand-dark rounded-full px-3 py-1 text-xs font-bold">
+        <span className="bg-brand/10 text-brand-dark rounded-md px-3 py-1 text-xs font-bold">
           {matchPercentage}% cocok
         </span>
       </div>

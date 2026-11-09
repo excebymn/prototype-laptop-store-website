@@ -32,14 +32,20 @@ export function instagramMessageLink(profileUrl: string): string {
 // Lihat public/images/README.md untuk ukuran & format yang disarankan.
 // ---------------------------------------------------------------------------
 
-/** Path logo, mis. "/images/logo.png" (taruh file di public/images/). `null` = pakai monogram sementara. */
-export const LOGO_SRC: string | null = null;
-
 /** Foto hero beranda, mis. "/images/hero.jpg". `null` = pakai ilustrasi laptop sementara. */
 export const HERO_IMAGE_SRC: string | null = "/images/hero.jpg";
 
 /** Ubah ke `true` setelah foto produk (path di laptops.json `images`) benar-benar ada di public/. */
 export const PRODUCT_PHOTOS_READY = false;
+
+/** Foto mockup sementara untuk SEMUA produk, dipakai selama PRODUCT_PHOTOS_READY = false. */
+export const PRODUCT_PLACEHOLDER_SRC = "/images/laptops/mockup.png";
+
+/** Foto ke-`index` sebuah laptop, atau mockup kalau foto asli belum siap. */
+export function productImageAt(images: string[], index = 0): string {
+  const real = images[index];
+  return PRODUCT_PHOTOS_READY && real ? real : PRODUCT_PLACEHOLDER_SRC;
+}
 
 /** Teks garansi toko yang tampil di badge & strip keunggulan. */
 export const WARRANTY_TEXT = "Garansi Toko 1 Bulan";

@@ -18,6 +18,7 @@ import { formatPrice } from "@/lib/format";
 import { CONDITION_LABEL, CONDITION_STYLE } from "@/lib/laptop-display";
 import { SITE_URL, INSTAGRAM_PROFILE_URL } from "@/lib/site";
 import { LaptopGallery } from "@/components/laptop-gallery";
+import { Reveal, RevealItem, RevealStagger } from "@/components/motion";
 import { AddToCompareButton } from "@/components/laptop-card/add-to-compare-button";
 import { ContactAdminButton } from "@/components/contact-admin-button";
 import { ProductShare } from "@/components/product-share";
@@ -113,38 +114,44 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
 
       <Link
         href="/laptops"
-        className="text-slate hover:text-ink inline-flex items-center gap-1.5 text-sm font-medium"
+        className="anim-rise text-slate hover:text-ink inline-flex items-center gap-1.5 text-sm font-medium"
       >
         <ArrowLeft className="h-4 w-4" aria-hidden="true" />
         Kembali ke Katalog
       </Link>
 
       <div className="mt-6 grid grid-cols-1 gap-10 lg:grid-cols-2">
-        <LaptopGallery images={laptop.images} condition={laptop.condition} />
+        <Reveal x={-40} y={0}>
+          <LaptopGallery images={laptop.images} condition={laptop.condition} />
+        </Reveal>
 
-        <div className="flex flex-col gap-5">
-          <div>
+        <RevealStagger className="flex flex-col gap-5" stagger={0.08}>
+          <RevealItem>
             <p className="text-slate text-sm font-medium">{laptop.brand}</p>
             <h1 className="font-display text-ink mt-1 text-2xl font-semibold sm:text-3xl">
               {laptop.name}
             </h1>
             <span
-              className={`mt-2 inline-block rounded-full px-3 py-1 text-xs font-semibold ${CONDITION_STYLE[laptop.condition]}`}
+              className={`mt-2 inline-block rounded-md px-3 py-1 text-xs font-semibold ${CONDITION_STYLE[laptop.condition]}`}
             >
               {CONDITION_LABEL[laptop.condition]}
             </span>
-          </div>
+          </RevealItem>
 
-          <p className="text-ink font-mono text-3xl font-semibold">{formatPrice(laptop.price)}</p>
+          <RevealItem>
+            <p className="text-ink font-mono text-3xl font-semibold">
+              {formatPrice(laptop.price)}
+            </p>
+          </RevealItem>
 
           {!laptop.isAvailable && (
-            <p className="text-slate border-surface bg-surface/40 rounded-md border px-3 py-2 text-sm">
+            <RevealItem className="text-slate border-surface bg-surface/40 rounded-md border px-3 py-2 text-sm">
               Unit ini sedang tidak tersedia. Hubungi admin untuk cek unit serupa.
-            </p>
+            </RevealItem>
           )}
 
           {/* Key specs — highlight cepat, detail lengkap ada di tabel full specs */}
-          <div className="border-surface grid grid-cols-2 gap-3 rounded-xl border p-4 sm:grid-cols-4">
+          <RevealItem className="border-surface grid grid-cols-2 gap-3 rounded-lg border p-4 sm:grid-cols-4">
             <div className="flex flex-col items-center gap-1 text-center">
               <Cpu className="text-ink h-5 w-5" aria-hidden="true" />
               <span className="text-slate text-xs">{laptop.specs.cpu}</span>
@@ -163,24 +170,26 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
               <Monitor className="text-ink h-5 w-5" aria-hidden="true" />
               <span className="text-slate text-xs">{laptop.specs.display}</span>
             </div>
-          </div>
+          </RevealItem>
 
-          <div className="flex flex-wrap gap-3">
+          <RevealItem className="flex flex-wrap gap-3">
             <ContactAdminButton
               instagramUrl={info.socialMedia.instagram ?? INSTAGRAM_PROFILE_URL}
               laptop={laptop}
             />
             <AddToCompareButton laptop={laptop} />
-          </div>
+          </RevealItem>
 
-          <ProductShare laptop={laptop} storeName={info.storeName} />
+          <RevealItem>
+            <ProductShare laptop={laptop} storeName={info.storeName} />
+          </RevealItem>
 
-          <div>
+          <RevealItem>
             <h2 className="font-display text-ink text-lg font-semibold">Deskripsi</h2>
             <p className="text-slate mt-2 text-sm leading-relaxed">{laptop.description}</p>
-          </div>
+          </RevealItem>
 
-          <div>
+          <RevealItem>
             <h2 className="font-display text-ink text-lg font-semibold">Yang Didapat</h2>
             <ul className="text-slate mt-2 space-y-1.5 text-sm">
               {laptop.whatsIncluded.map((item) => (
@@ -190,22 +199,28 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
                 </li>
               ))}
             </ul>
-          </div>
-        </div>
+          </RevealItem>
+        </RevealStagger>
       </div>
 
       {/* Full specs */}
       <div className="mt-12">
-        <h2 className="font-display text-ink text-xl font-semibold">Spesifikasi Lengkap</h2>
-        <dl className="border-surface mt-4 divide-y rounded-xl border">
+        <Reveal>
+          <h2 className="font-display text-ink text-xl font-semibold">Spesifikasi Lengkap</h2>
+        </Reveal>
+        <RevealStagger
+          as="dl"
+          className="border-surface mt-4 divide-y rounded-lg border"
+          stagger={0.05}
+        >
           {specRows.map(({ icon: Icon, label, value }) => (
-            <div key={label} className="flex items-center gap-3 px-4 py-3">
+            <RevealItem key={label} className="flex items-center gap-3 px-4 py-3">
               <Icon className="text-slate h-4 w-4 shrink-0" aria-hidden="true" />
               <dt className="text-slate w-36 shrink-0 text-sm">{label}</dt>
               <dd className="text-ink text-sm font-medium">{value}</dd>
-            </div>
+            </RevealItem>
           ))}
-        </dl>
+        </RevealStagger>
       </div>
     </main>
   );

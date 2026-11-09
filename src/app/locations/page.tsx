@@ -29,10 +29,13 @@ export default async function LocationsPage() {
 
   return (
     <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-10 sm:px-6 lg:px-8">
-      <h1 className="font-display text-ink text-4xl font-extrabold tracking-wide uppercase sm:text-5xl">
+      <h1 className="anim-rise font-display text-ink text-4xl font-extrabold tracking-wide uppercase sm:text-5xl">
         Lokasi Toko
       </h1>
-      <p className="text-slate mt-2 max-w-xl text-sm">
+      <p
+        className="anim-rise text-slate mt-2 max-w-xl text-sm"
+        style={{ "--d": "0.1s" } as React.CSSProperties}
+      >
         {info.branches.length} cabang di Jawa Timur dan Yogyakarta. Buka {info.operatingHours[0]?.days.toLowerCase()},{" "}
         {info.operatingHours[0]?.hours}.
       </p>
@@ -42,7 +45,7 @@ export default async function LocationsPage() {
           <RevealItem
             as="li"
             key={branch.id}
-            className={`flex flex-col gap-3 rounded-3xl border p-5 ${
+            className={`flex flex-col gap-3 rounded-lg border p-5 ${
               branch.isMain ? "border-ink bg-card ring-ink ring-1" : "border-surface bg-card"
             }`}
           >
@@ -68,7 +71,7 @@ export default async function LocationsPage() {
               href={mapsLink(branch.address)}
               target="_blank"
               rel="noopener noreferrer"
-              className="border-ink text-ink hover:bg-ink mt-auto inline-flex items-center justify-center gap-2 rounded-full border px-4 py-2.5 text-sm font-semibold transition-colors hover:text-white"
+              className="border-ink text-ink hover:bg-ink mt-auto inline-flex items-center justify-center gap-2 rounded-md border px-4 py-2.5 text-sm font-semibold transition-colors hover:text-white"
             >
               Buka di Maps
               <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
@@ -77,7 +80,7 @@ export default async function LocationsPage() {
         ))}
       </RevealStagger>
 
-      <Reveal className="bg-deep mt-12 rounded-[2rem] px-6 py-10 sm:px-10">
+      <Reveal className="bg-ink mt-12 rounded-[2rem] px-6 py-10 sm:px-10">
         <h2 className="font-display text-3xl font-bold tracking-wide text-white uppercase sm:text-4xl">
           Cara Melihat Stok Ready
         </h2>
@@ -90,7 +93,7 @@ export default async function LocationsPage() {
             href={waLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 rounded-full bg-[#128c4a] px-6 py-3.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+            className="flex items-center justify-center gap-2 rounded-md bg-[#128c4a] px-6 py-3.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
           >
             <MessageCircle className="h-4 w-4" aria-hidden="true" />
             Tanya via WhatsApp
@@ -99,7 +102,7 @@ export default async function LocationsPage() {
             href={igDmLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-ink flex items-center justify-center gap-2 rounded-full bg-paper px-6 py-3.5 text-sm font-semibold transition-opacity hover:opacity-90"
+            className="text-ink flex items-center justify-center gap-2 rounded-md bg-paper px-6 py-3.5 text-sm font-semibold transition-opacity hover:opacity-90"
           >
             <InstagramIcon className="h-4 w-4" aria-hidden="true" />
             DM Instagram

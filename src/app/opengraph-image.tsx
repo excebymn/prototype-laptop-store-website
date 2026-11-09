@@ -9,6 +9,7 @@
 
 import { ImageResponse } from "next/og";
 import { storeInfoRepository } from "@/lib/data";
+import { LOGO_MARK_PATH, LOGO_MARK_VIEWBOX } from "@/components/logo/mark";
 
 export const alt = "Excebymn — Laptop Bekas Berkualitas";
 export const size = { width: 1200, height: 630 };
@@ -39,22 +40,9 @@ export default async function Image() {
             gap: "16px",
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "56px",
-              height: "56px",
-              borderRadius: "12px",
-              backgroundColor: "#C1121F",
-              color: "#FBF2DF",
-              fontSize: "22px",
-              fontWeight: 700,
-            }}
-          >
-            EX
-          </div>
+          <svg width="46" height="55" viewBox={LOGO_MARK_VIEWBOX}>
+            <path d={LOGO_MARK_PATH} fill="#FBF2DF" />
+          </svg>
           <div style={{ fontSize: "36px", fontWeight: 700 }}>{info.storeName}</div>
         </div>
 

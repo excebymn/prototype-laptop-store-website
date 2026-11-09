@@ -68,7 +68,7 @@ export function PrototypeNotice({ info }: { info: StoreInfo }) {
       onClick={dismiss}
     >
       <div
-        className="border-surface bg-paper relative w-full max-w-md rounded-2xl border p-6 shadow-xl sm:p-7"
+        className="border-surface bg-paper relative w-full max-w-md rounded-lg border p-6 shadow-xl sm:p-7"
         onClick={(event) => event.stopPropagation()}
       >
         <button
@@ -94,7 +94,7 @@ export function PrototypeNotice({ info }: { info: StoreInfo }) {
           <button
             type="button"
             onClick={handleContact}
-            className="bg-ink inline-flex flex-1 items-center justify-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+            className="bg-ink inline-flex flex-1 items-center justify-center gap-2 rounded-md px-4 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
           >
             <InstagramIcon className="h-4 w-4" aria-hidden="true" />
             Hubungi via Instagram
@@ -102,7 +102,7 @@ export function PrototypeNotice({ info }: { info: StoreInfo }) {
           <button
             type="button"
             onClick={dismiss}
-            className="text-slate hover:text-ink border-surface inline-flex items-center justify-center rounded-full border px-4 py-2.5 text-sm font-medium transition-colors"
+            className="text-slate hover:text-ink border-surface inline-flex items-center justify-center rounded-md border px-4 py-2.5 text-sm font-medium transition-colors"
           >
             Lanjut Lihat-Lihat
           </button>

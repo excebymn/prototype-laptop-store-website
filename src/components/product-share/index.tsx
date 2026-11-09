@@ -67,7 +67,7 @@ export function ProductShare({ laptop, storeName }: ProductShareProps) {
   };
 
   return (
-    <div className="border-surface flex flex-wrap gap-2 rounded-xl border p-3">
+    <div className="border-surface flex flex-wrap gap-2 rounded-lg border p-3">
       <ShareButton
         icon={Download}
         label="Simpan Gambar"
@@ -110,7 +110,7 @@ function ShareButton({ icon: Icon, label, doneLabel, status, onClick }: ShareBut
       type="button"
       onClick={onClick}
       disabled={isWorking}
-      className="border-surface text-slate hover:border-ink hover:text-ink inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-semibold transition-colors disabled:opacity-60"
+      className="border-surface text-slate hover:border-ink hover:text-ink inline-flex items-center gap-2 rounded-md border px-4 py-2 text-xs font-semibold transition-colors disabled:opacity-60"
     >
       {isDone ? (
         <Check className="text-moss h-3.5 w-3.5" aria-hidden="true" />

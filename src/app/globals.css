@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
 :root {
+  /* Paksa kontrol bawaan browser (dropdown, scrollbar) tampil terang,
+     supaya tidak ikut tema gelap browser/OS. */
+  color-scheme: light;
+
   /* Palet: cream hangat + cosmos blue + crimson + blue marble. */
   --color-ink: #003049; /* cosmos blue — teks utama & blok gelap */
   --color-paper: #fbf2df; /* cream — latar halaman */
@@ -38,6 +42,17 @@
   --font-display: var(--font-barlow);
   --font-sans: var(--font-inter);
   --font-mono: var(--font-plex-mono);
+}
+
+/* Dropdown <select>: warna eksplisit agar opsi selalu terbaca
+   (di browser tema gelap, teks opsi bisa jadi putih di atas latar terang). */
+select,
+select option {
+  background-color: var(--color-card);
+  color: var(--color-ink);
+}
+select option:checked {
+  background-color: var(--color-sky-soft);
 }
 
 html {

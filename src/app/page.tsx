@@ -1,25 +1,19 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import {
-  ArrowRight,
-  Briefcase,
-  Code2,
-  Coffee,
-  Gamepad2,
-  GraduationCap,
-  MapPin,
-  MessageCircle,
-  Palette,
-  Search,
-  ShieldCheck,
-} from "lucide-react";
+import { ArrowRight, ArrowUpRight, MapPin, MessageCircle } from "lucide-react";
 import { laptopRepository, storeInfoRepository } from "@/lib/data";
 import type { Category } from "@/lib/data";
 import { HomeHero } from "@/components/home-hero";
+import { InstagramIcon } from "@/components/icons/instagram-icon";
 import { LaptopCard } from "@/components/laptop-card";
 import { Reveal, RevealItem, RevealStagger } from "@/components/motion";
-import { ScrollRow } from "@/components/scroll-row";
-import { WARRANTY_TEXT, whatsappLink } from "@/lib/site";
+import { SectionHead } from "@/components/section-head";
+import {
+  INSTAGRAM_PROFILE_URL,
+  WARRANTY_TEXT,
+  instagramMessageLink,
+  whatsappLink,
+} from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
   const info = await storeInfoRepository.get();
@@ -37,23 +31,20 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const NEED_CATEGORIES: {
-  value: Category;
-  label: string;
-  note: string;
-  icon: typeof Briefcase;
-}[] = [
-  { value: "business", label: "Kerja Kantoran", note: "Ringan, tahan lama, keyboard nyaman", icon: Briefcase },
-  { value: "gaming", label: "Gaming", note: "GPU dedicated & layar mulus", icon: Gamepad2 },
-  { value: "programming", label: "Ngoding", note: "RAM lega, SSD kencang", icon: Code2 },
-  { value: "school", label: "Sekolah & Kuliah", note: "Terjangkau & baterai awet", icon: GraduationCap },
-  { value: "creative", label: "Desain & Kreatif", note: "Layar akurat, tenaga besar", icon: Palette },
-  { value: "everyday", label: "Harian & Ringan", note: "Browsing, nonton, dokumen", icon: Coffee },
+const NEED_CATEGORIES: { value: Category; label: string; note: string }[] = [
+  { value: "business", label: "Kerja Kantoran", note: "Ringan, tahan lama, keyboard nyaman" },
+  { value: "gaming", label: "Gaming", note: "GPU dedicated & layar mulus" },
+  { value: "programming", label: "Ngoding", note: "RAM lega, SSD kencang" },
+  { value: "school", label: "Sekolah & Kuliah", note: "Terjangkau & baterai awet" },
+  { value: "creative", label: "Desain & Kreatif", note: "Layar akurat, tenaga besar" },
+  { value: "everyday", label: "Harian & Ringan", note: "Browsing, nonton, dokumen" },
 ];
 
-// Judul section dibuat seragam supaya ritme halaman rapi.
-const SECTION_TITLE =
-  "font-display text-ink text-3xl font-bold tracking-wide uppercase sm:text-4xl";
+const STEPS = [
+  "Pilih laptop yang kamu suka di katalog.",
+  "Tanya stoknya lewat WhatsApp atau DM Instagram.",
+  "Datang ke cabang terdekat dan coba unitnya langsung.",
+];
 
 export default async function HomePage() {
   const [featuredLaptops, info] = await Promise.all([
@@ -61,116 +52,181 @@ export default async function HomePage() {
     storeInfoRepository.get(),
   ]);
   const waLink = whatsappLink(info.whatsapp, `Halo ${info.storeName}, saya mau tanya stok laptop.`);
+  const igDmLink = instagramMessageLink(info.socialMedia.instagram ?? INSTAGRAM_PROFILE_URL);
+  const hours = info.operatingHours[0];
 
-  const valueProps = [
-    { icon: ShieldCheck, title: WARRANTY_TEXT, note: "Ada kendala di awal pemakaian? Kami bantu tangani." },
-    { icon: Search, title: "Cek Stok Ready", note: "Tanya stok terbaru lewat WhatsApp atau Instagram." },
-    { icon: MapPin, title: `${info.branches.length} Cabang`, note: "Datang langsung dan coba unitnya sebelum dibeli." },
+  const facts = [
+    { label: "Garansi", value: WARRANTY_TEXT.replace("Garansi ", "") },
+    { label: "Pemeriksaan", value: "Dicek satu-satu" },
+    { label: "Cabang", value: `${info.branches.length} lokasi` },
+    { label: "Buka", value: hours ? hours.hours.replace(" WIB", "") : "Setiap hari" },
   ];
 
   return (
     <main className="flex flex-1 flex-col">
       <HomeHero info={info} />
 
-      {/* Laptop Pilihan: 3 kartu. Geser di HP, grid di layar ≥md. */}
-      <section className="px-4 pt-20 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <Reveal className="flex items-end justify-between gap-4">
-            <div>
-              <h2 className={SECTION_TITLE}>Laptop Pilihan</h2>
-              <p className="text-slate mt-1 text-sm">Unit terbaik yang lagi kami rekomendasikan</p>
-            </div>
+      {/* Strip fakta toko — navy penuh selebar layar */}
+      <section className="bg-ink mt-12 sm:mt-16" aria-label="Fakta toko">
+        <RevealStagger
+          as="ul"
+          className="mx-auto grid max-w-6xl grid-cols-2 lg:grid-cols-4"
+          stagger={0.08}
+        >
+          {facts.map(({ label, value }) => (
+            <RevealItem
+              as="li"
+              key={label}
+              className="border-paper/15 border-l px-5 py-6 first:border-l-0 max-lg:odd:border-l-0 max-lg:[&:nth-child(n+3)]:border-t sm:px-6"
+            >
+              <p className="text-sky font-mono text-[11px] tracking-widest uppercase">{label}</p>
+              <p className="font-display text-paper mt-1 text-2xl font-bold tracking-wide uppercase sm:text-3xl">
+                {value}
+              </p>
+            </RevealItem>
+          ))}
+        </RevealStagger>
+      </section>
+
+      {/* 01 — Laptop Pilihan */}
+      <section className="mx-auto w-full max-w-6xl px-4 pt-20 sm:px-6 lg:px-8">
+        <SectionHead
+          index="01"
+          title="Laptop Pilihan"
+          subtitle="Unit yang lagi kami rekomendasikan"
+          action={
             <Link
               href="/laptops"
-              className="bg-ink inline-flex shrink-0 items-center rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+              className="text-ink hover:text-brand-dark group inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold transition-colors"
             >
-              Lihat Semua
+              Lihat semua
+              <ArrowRight
+                className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                aria-hidden="true"
+              />
             </Link>
-          </Reveal>
+          }
+        />
 
-          <RevealStagger className="no-scrollbar -mx-4 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-1 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0">
-            {featuredLaptops.slice(0, 3).map((laptop) => (
-              <RevealItem key={laptop.id} className="w-[80%] shrink-0 snap-start md:w-auto">
-                <LaptopCard laptop={laptop} />
-              </RevealItem>
-            ))}
-          </RevealStagger>
-        </div>
+        <RevealStagger
+          className="no-scrollbar -mx-4 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-1 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 lg:grid-cols-4"
+          stagger={0.08}
+        >
+          {featuredLaptops.slice(0, 4).map((laptop) => (
+            <RevealItem key={laptop.id} className="w-[78%] shrink-0 snap-start sm:w-auto">
+              <LaptopCard laptop={laptop} />
+            </RevealItem>
+          ))}
+        </RevealStagger>
       </section>
 
-      {/* Cari sesuai kebutuhan */}
-      <section className="px-4 pt-20 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <Reveal>
-          <ScrollRow
-            title="Cari Sesuai Kebutuhan"
-            subtitle="Pilih kebutuhanmu, Smart Finder yang carikan laptop paling cocok."
-          >
-            {NEED_CATEGORIES.map(({ value, label, note, icon: Icon }) => (
+      {/* 02 — Cari sesuai kebutuhan */}
+      <section className="mx-auto w-full max-w-6xl px-4 pt-20 sm:px-6 lg:px-8">
+        <SectionHead
+          index="02"
+          title="Cari Sesuai Kebutuhan"
+          subtitle="Pilih kebutuhanmu, Smart Finder yang carikan laptop paling cocok."
+        />
+
+        <RevealStagger
+          className="border-surface bg-surface mt-8 grid grid-cols-1 gap-px overflow-hidden rounded-lg border sm:grid-cols-2 lg:grid-cols-3"
+          stagger={0.07}
+        >
+          {NEED_CATEGORIES.map(({ value, label, note }, index) => (
+            <RevealItem key={value} className="bg-card">
               <Link
-                key={value}
                 href={`/finder?purpose=${value}`}
-                className="group bg-card border-surface hover:border-ink flex w-60 shrink-0 snap-start flex-col gap-4 rounded-3xl border p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-ink/10"
+                className="group hover:bg-ink flex h-full items-start justify-between gap-4 p-5 transition-colors duration-300"
               >
-                <span className="bg-sky-soft text-ink flex h-12 w-12 items-center justify-center rounded-2xl">
-                  <Icon className="h-6 w-6" aria-hidden="true" />
-                </span>
                 <div>
-                  <h3 className="font-display text-ink text-xl font-bold tracking-wide uppercase">
+                  <p className="text-brand-dark group-hover:text-sky font-mono text-xs font-semibold tracking-widest transition-colors">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <h3 className="font-display text-ink group-hover:text-paper mt-1 text-2xl font-bold tracking-wide uppercase transition-colors">
                     {label}
                   </h3>
-                  <p className="text-slate mt-1 text-xs leading-relaxed">{note}</p>
+                  <p className="text-slate group-hover:text-paper/70 mt-1 text-sm transition-colors">
+                    {note}
+                  </p>
                 </div>
-                <span className="text-brand-dark mt-auto inline-flex items-center gap-1 text-xs font-semibold">
-                  Lihat laptop
-                  <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
-                </span>
+                <ArrowUpRight
+                  className="text-ink group-hover:text-paper h-5 w-5 shrink-0 transition-all duration-300 group-hover:rotate-45"
+                  aria-hidden="true"
+                />
               </Link>
-            ))}
-          </ScrollRow>
-          </Reveal>
-        </div>
+            </RevealItem>
+          ))}
+        </RevealStagger>
       </section>
 
-      {/* Keunggulan + ajakan — satu panel merah tua */}
-      <section className="px-4 py-20 sm:px-6 lg:px-8">
-        <Reveal className="bg-deep mx-auto max-w-6xl rounded-[2rem] px-6 py-12 sm:px-10">
-          <h2 className="font-display text-paper text-center text-3xl font-bold tracking-wide uppercase sm:text-4xl">
-            Beli Tenang di {info.storeName}
-          </h2>
+      {/* 03 — Cara cek stok */}
+      <section className="mx-auto w-full max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
+        <SectionHead
+          index="03"
+          title="Cara Melihat Stok Ready"
+          subtitle="Stok tiap cabang bisa berubah cepat, jadi tanyakan dulu sebelum datang."
+        />
 
-          <RevealStagger as="ul" className="mt-10 grid gap-8 sm:grid-cols-3" stagger={0.15}>
-            {valueProps.map(({ icon: Icon, title, note }) => (
-              <RevealItem as="li" key={title} className="flex flex-col items-center gap-2 text-center">
-                <span className="bg-paper/10 text-paper flex h-12 w-12 items-center justify-center rounded-full">
-                  <Icon className="h-6 w-6" aria-hidden="true" />
+        <div className="mt-8 grid gap-10 lg:grid-cols-2">
+          <RevealStagger as="ol" className="border-surface divide-surface divide-y border-y" stagger={0.1}>
+            {STEPS.map((step, index) => (
+              <RevealItem as="li" key={step} className="flex items-start gap-4 py-5">
+                <span className="font-display text-brand-dark text-3xl leading-none font-bold">
+                  {index + 1}
                 </span>
-                <h3 className="font-display text-paper text-xl font-bold tracking-wide uppercase">
-                  {title}
-                </h3>
-                <p className="text-paper/75 max-w-xs text-sm">{note}</p>
+                <p className="text-ink pt-1 text-base">{step}</p>
               </RevealItem>
             ))}
           </RevealStagger>
 
-          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <a
-              href={waLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-paper text-ink flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition-opacity hover:opacity-90"
-            >
-              <MessageCircle className="h-4 w-4" aria-hidden="true" />
-              Tanya via WhatsApp
-            </a>
-            <Link
-              href="/locations"
-              className="border-paper/50 text-paper hover:bg-paper hover:text-ink flex items-center justify-center gap-2 rounded-full border px-6 py-3.5 text-sm font-semibold transition-colors"
-            >
-              Lihat {info.branches.length} Cabang
-            </Link>
-          </div>
-        </Reveal>
+          <Reveal className="flex flex-col gap-6">
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <a
+                href={waLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-brand flex flex-1 items-center justify-center gap-2 rounded-md px-6 py-3.5 text-sm font-semibold text-white transition-all hover:shadow-lg hover:shadow-brand/30 active:scale-95"
+              >
+                <MessageCircle className="h-4 w-4" aria-hidden="true" />
+                Tanya via WhatsApp
+              </a>
+              <a
+                href={igDmLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border-ink text-ink hover:bg-ink flex flex-1 items-center justify-center gap-2 rounded-md border px-6 py-3.5 text-sm font-semibold transition-all hover:text-white active:scale-95"
+              >
+                <InstagramIcon className="h-4 w-4" aria-hidden="true" />
+                DM Instagram
+              </a>
+            </div>
+
+            <div>
+              <p className="text-slate font-mono text-[11px] tracking-widest uppercase">
+                Cabang kami
+              </p>
+              <ul className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+                {info.branches.slice(0, 6).map((branch) => (
+                  <li key={branch.id} className="text-ink flex items-center gap-2">
+                    <MapPin className="text-brand h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                    {branch.city}
+                    {branch.isMain && <span className="text-slate text-xs">· utama</span>}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="/locations"
+                className="text-ink hover:text-brand-dark group mt-4 inline-flex items-center gap-1.5 text-sm font-semibold transition-colors"
+              >
+                Lihat semua {info.branches.length} cabang
+                <ArrowRight
+                  className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                  aria-hidden="true"
+                />
+              </Link>
+            </div>
+          </Reveal>
+        </div>
       </section>
     </main>
   );

@@ -1,14 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { Laptop as LaptopIcon } from "lucide-react";
+import Image from "next/image";
 import { CONDITION_LABEL, CONDITION_STYLE } from "@/lib/laptop-display";
+import { productImageAt } from "@/lib/site";
 import type { Condition } from "@/lib/data";
 
-// Belum ada asset foto asli (lihat public/images/laptops/README.md), jadi
-// setiap slot gambar ditampilkan sebagai placeholder bernomor. Begitu foto
-// asli tersedia, tinggal ganti div placeholder ini dengan <Image src={...} />
-// — jumlah & urutan slot sudah mengikuti `laptop.images`.
+// Selama foto asli belum siap (PRODUCT_PHOTOS_READY di lib/site.ts), semua slot
+// memakai foto mockup. Jumlah & urutan slot mengikuti `laptop.images`.
 
 interface LaptopGalleryProps {
   images: string[];
@@ -21,10 +20,17 @@ export function LaptopGallery({ images, condition }: LaptopGalleryProps) {
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="from-ink to-ink/70 border-surface relative flex aspect-4/3 items-center justify-center rounded-xl border bg-gradient-to-br">
-        <LaptopIcon className="h-16 w-16 text-white/30" aria-hidden="true" />
+      <div className="border-surface bg-card relative aspect-4/3 overflow-hidden rounded-lg border">
+        <Image
+          src={productImageAt(images, activeIndex)}
+          alt={`Foto ${activeIndex + 1}`}
+          fill
+          priority
+          sizes="(min-width: 1024px) 50vw, 100vw"
+          className="object-contain p-6 mix-blend-multiply"
+        />
         <span
-          className={`absolute top-3 right-3 rounded-full px-3 py-1 text-xs font-semibold ${CONDITION_STYLE[condition]}`}
+          className={`absolute top-3 right-3 rounded-md px-3 py-1 text-xs font-semibold ${CONDITION_STYLE[condition]}`}
         >
           {CONDITION_LABEL[condition]}
         </span>
@@ -44,11 +50,17 @@ export function LaptopGallery({ images, condition }: LaptopGalleryProps) {
               onClick={() => setActiveIndex(index)}
               aria-label={`Lihat foto ${index + 1}`}
               aria-pressed={activeIndex === index}
-              className={`from-ink to-ink/70 flex h-16 w-16 shrink-0 items-center justify-center rounded-lg border bg-gradient-to-br ${
-                activeIndex === index ? "border-brand" : "border-surface opacity-60"
+              className={`bg-card relative h-16 w-16 shrink-0 overflow-hidden rounded-md border ${
+                activeIndex === index ? "border-ink" : "border-surface opacity-60"
               }`}
             >
-              <LaptopIcon className="h-5 w-5 text-white/30" aria-hidden="true" />
+              <Image
+                src={productImageAt(images, index)}
+                alt=""
+                fill
+                sizes="64px"
+                className="object-contain p-1 mix-blend-multiply"
+              />
             </button>
           ))}
         </div>

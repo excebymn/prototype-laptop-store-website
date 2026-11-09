@@ -13,29 +13,32 @@ import {
 } from "motion/react";
 
 const EASE: [number, number, number, number] = [0.2, 0.7, 0.2, 1];
-const VIEWPORT = { once: true, margin: "0px 0px -80px 0px" } as const;
+// once: false → animasi diputar ulang setiap elemen masuk layar lagi (scroll naik/turun).
+const VIEWPORT = { once: false, amount: 0.15, margin: "0px 0px -60px 0px" } as const;
 
 export function MotionProvider({ children }: { children: React.ReactNode }) {
   return <MotionConfig reducedMotion="user">{children}</MotionConfig>;
 }
 
-/** Muncul (fade + naik) saat masuk layar. Hanya sekali. */
+/** Muncul (fade + geser) setiap kali masuk layar. */
 export function Reveal({
   children,
   className,
   delay = 0,
   y = 28,
+  x = 0,
 }: {
   children: React.ReactNode;
   className?: string;
   delay?: number;
   y?: number;
+  x?: number;
 }) {
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y, x }}
+      whileInView={{ opacity: 1, y: 0, x: 0 }}
       viewport={VIEWPORT}
       transition={{ duration: 0.7, ease: EASE, delay }}
     >
@@ -54,7 +57,7 @@ const itemVariants: Variants = {
   show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.7, ease: EASE } },
 };
 
-type Tag = "div" | "ul" | "ol";
+type Tag = "div" | "ul" | "ol" | "dl";
 type ItemTag = "div" | "li";
 
 /** Grup yang memunculkan anak-anaknya (RevealItem) satu per satu. */

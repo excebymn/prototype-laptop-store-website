@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Scale, Trash2 } from "lucide-react";
 import { useStore } from "@/store";
 import { CompareTable } from "@/components/compare-table";
+import { Reveal } from "@/components/motion";
 
 export default function ComparePage() {
   const slots = useStore((state) => state.slots);
@@ -20,9 +21,11 @@ export default function ComparePage() {
 
   return (
     <main className="mx-auto w-full max-w-4xl flex-1 px-4 py-10 sm:px-6 lg:px-8">
-      <div className="flex items-center justify-between gap-4">
+      <div className="anim-rise flex items-center justify-between gap-4">
         <div>
-          <h1 className="font-display text-ink text-2xl font-semibold">Compare Laptop</h1>
+          <h1 className="font-display text-ink text-3xl font-bold tracking-wide uppercase">
+            Compare Laptop
+          </h1>
           <p className="text-slate mt-1 text-sm">
             Bandingkan spesifikasi sampai 2 laptop sekaligus.
           </p>
@@ -41,9 +44,11 @@ export default function ComparePage() {
 
       <div className="mt-6">
         {hasAnyLaptop ? (
-          <CompareTable slots={slots} />
+          <Reveal>
+            <CompareTable slots={slots} />
+          </Reveal>
         ) : (
-          <div className="border-surface flex flex-col items-center gap-3 rounded-xl border py-16 text-center">
+          <Reveal className="border-surface flex flex-col items-center gap-3 rounded-lg border py-16 text-center">
             <Scale className="text-slate h-10 w-10" aria-hidden="true" />
             <p className="text-ink font-medium">Belum ada laptop yang dibandingkan.</p>
             <p className="text-slate max-w-sm text-sm">
@@ -52,11 +57,11 @@ export default function ComparePage() {
             </p>
             <Link
               href="/laptops"
-              className="bg-ink mt-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+              className="bg-ink mt-2 rounded-md px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
             >
               Jelajahi Katalog
             </Link>
-          </div>
+          </Reveal>
         )}
       </div>
     </main>

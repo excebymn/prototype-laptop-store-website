@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { motion } from "motion/react";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, RotateCcw, SearchX } from "lucide-react";
 import { useStore } from "@/store";
@@ -11,6 +12,7 @@ import {
   storageLabel,
 } from "@/lib/catalog-options";
 import { FinderResultCard } from "@/components/finder-result-card";
+import { RevealItem, RevealStagger } from "@/components/motion";
 import type { Category } from "@/lib/data";
 
 type StepId = "purpose" | "budget" | "ram" | "storage" | "brand";
@@ -26,7 +28,7 @@ const STEPS: { id: StepId; question: string }[] = [
 const MAX_RESULTS_SHOWN = 6;
 
 function optionButtonClass(isSelected: boolean) {
-  return `rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
+  return `rounded-md border px-4 py-2 text-sm font-medium transition-colors ${
     isSelected
       ? "border-brand bg-brand/10 text-brand-dark"
       : "border-surface text-slate hover:border-ink hover:text-ink"
@@ -119,7 +121,7 @@ export function SmartFinder({ initialPurpose }: SmartFinderProps) {
           <button
             type="button"
             onClick={() => void runSearch()}
-            className="border-ink text-ink inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold"
+            className="border-ink text-ink inline-flex items-center gap-2 rounded-md border px-4 py-2 text-sm font-semibold"
           >
             <RotateCcw className="h-4 w-4" aria-hidden="true" />
             Coba Lagi
@@ -141,14 +143,14 @@ export function SmartFinder({ initialPurpose }: SmartFinderProps) {
             <button
               type="button"
               onClick={handleReset}
-              className="border-ink text-ink inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold"
+              className="border-ink text-ink inline-flex items-center gap-2 rounded-md border px-4 py-2 text-sm font-semibold"
             >
               <RotateCcw className="h-4 w-4" aria-hidden="true" />
               Ulangi
             </button>
             <Link
               href="/laptops"
-              className="bg-ink rounded-full px-4 py-2 text-sm font-semibold text-white"
+              className="bg-ink rounded-md px-4 py-2 text-sm font-semibold text-white"
             >
               Lihat Katalog
             </Link>
@@ -173,17 +175,22 @@ export function SmartFinder({ initialPurpose }: SmartFinderProps) {
           </button>
         </div>
 
-        <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <RevealStagger
+          className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          stagger={0.08}
+        >
           {topResults.map((result, index) => (
-            <FinderResultCard key={result.laptop.id} result={result} rank={index + 1} />
+            <RevealItem key={result.laptop.id}>
+              <FinderResultCard result={result} rank={index + 1} />
+            </RevealItem>
           ))}
-        </div>
+        </RevealStagger>
       </div>
     );
   }
 
   return (
-    <div className="border-surface rounded-2xl border p-6 sm:p-8">
+    <div className="border-surface rounded-lg border p-6 sm:p-8">
       {/* Progress dots */}
       <div className="flex items-center justify-center gap-2">
         {STEPS.map((step, index) => (
@@ -200,6 +207,13 @@ export function SmartFinder({ initialPurpose }: SmartFinderProps) {
         Pertanyaan {stepIndex + 1} dari {STEPS.length} — boleh dilewati
       </p>
 
+      {/* key = id langkah → tiap pertanyaan baru masuk dengan geser + fade */}
+      <motion.div
+        key={currentStep.id}
+        initial={{ opacity: 0, x: 28 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.35, ease: [0.2, 0.7, 0.2, 1] }}
+      >
       <h2 className="font-display text-ink mt-2 text-center text-xl font-semibold">
         {currentStep.question}
       </h2>
@@ -277,6 +291,7 @@ export function SmartFinder({ initialPurpose }: SmartFinderProps) {
           </div>
         )}
       </div>
+      </motion.div>
 
       <div className="mt-8 flex items-center justify-between gap-3">
         <button
@@ -301,7 +316,7 @@ export function SmartFinder({ initialPurpose }: SmartFinderProps) {
             type="button"
             onClick={handleNext}
             disabled={isCalculating}
-            className="bg-ink inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-60"
+            className="bg-ink inline-flex items-center gap-2 rounded-md px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-60"
           >
             {isCalculating ? "Mencari..." : isLastStep ? "Lihat Hasil" : "Lanjut"}
             {!isCalculating && <ArrowRight className="h-4 w-4" aria-hidden="true" />}
